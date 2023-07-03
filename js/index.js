@@ -1,4 +1,7 @@
 import { Recette } from "./recette.js";
+import { clicUstensils } from "../functions/ustensiles.js";
+import { clickAppareils } from "../functions/appareils.js";
+import { clickIngredients } from "../functions/ingredients.js";
 
 //Affichage du nombre de recettes
 const nbrRecettes = document.querySelector(".nbr_recettes");
@@ -13,5 +16,8 @@ if (recipes.length <= 1) {
 recipes.forEach(element => {
   const ficheRecette = new Recette(element);
   ficheRecette.print();
-  console.log(recipes);
 });
+
+clicUstensils();
+clickAppareils();
+clickIngredients();

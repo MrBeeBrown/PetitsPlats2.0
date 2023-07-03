@@ -107,13 +107,39 @@ main {
   width: 10rem;
 }
 
-.chevron_down {
+.chevron_down_ingredients {
   position: absolute;
   right: .6rem;
   top: 1rem;
 }
 
-.chevron_up {
+.chevron_down_appareils {
+  position: absolute;
+  right: .6rem;
+  top: 1rem;
+}
+
+.chevron_down_ustensiles {
+  position: absolute;
+  right: .6rem;
+  top: 1rem;
+}
+
+.chevron_up_ingredients {
+  display: none;
+  position: absolute;
+  right: .6rem;
+  top: 1rem;
+}
+
+.chevron_up_appareils {
+  display: none;
+  position: absolute;
+  right: .6rem;
+  top: 1rem;
+}
+
+.chevron_up_ustensiles {
   display: none;
   position: absolute;
   right: .6rem;
@@ -128,9 +154,10 @@ main {
   border-radius: .5rem;
   border-style: none;
   background-color: var(--white-color);
+  cursor: pointer;
 }
 
-.ingredients_content {
+.filtre_ingredients {
   display: none;
   width: 10rem;
   position: absolute;
@@ -141,7 +168,7 @@ main {
   z-index: 2;
 }
 
-.appareils_content {
+.filtre_appareils {
   display: none;
   width: 10rem;
   position: absolute;
@@ -152,7 +179,7 @@ main {
   z-index: 2;
 }
 
-.ustensiles_content {
+.filtre_ustensiles {
   display: none;
   width: 10rem;
   position: absolute;
@@ -261,7 +288,7 @@ main {
   overflow: hidden;
 }
 
-.ingredients {
+.content_ingredients {
   display: grid;
   grid-template-columns: 9rem 9rem;
   column-gap: 5rem;

@@ -24,7 +24,7 @@ export class Recette {
       <p class="recette">Recette</p>    
       <p class="description_recette">${this.description}</p>
       <p class="liste_ingredients">Ingrédients</p>
-      <div class="ingredients">${this.printIngredients()}</div>
+      <div class="content_ingredients">${this.printIngredients()}</div>
     </div>`;
     content.appendChild(recette);
   }
@@ -52,7 +52,7 @@ export class Recette {
         container.innerHTML += `
         <div class="bloc_ingredient">
           <p class="nom_ingredient">${this.ingredients[i].ingredient}</p>
-          <p class="nbr_ingredient">${this.ingredients[i].quantity}${this.ingredients[i].unit}</p>
+          <p class="nbr_ingredient">${this.ingredients[i].quantity} ${this.ingredients[i].unit}</p>
         </div>
         `;
       }
