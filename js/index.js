@@ -11,13 +11,13 @@ if (recipes.length <= 1) {
   nbrRecettes.innerText = recipes.length + " " + "recettes";
 }
 
-
 //Affichage des recettes
 recipes.forEach(element => {
   const ficheRecette = new Recette(element);
   ficheRecette.print();
 });
 
+//Ajout des events sur les boutons de filtres
 clicUstensils();
 clickAppareils();
 clickIngredients();
