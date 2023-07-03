@@ -245,7 +245,7 @@ main {
 .liste_ingredients {
   font-family: 'Manrope', sans-serif;
   font-size: .75rem;
-  margin-top: 1rem;
+  margin: 1rem 0 1rem;
   text-transform: uppercase;
 }
 
@@ -259,4 +259,25 @@ main {
   /* word-wrap: break-word; */
   white-space: break-spaces;
   overflow: hidden;
+}
+
+.ingredients {
+  display: grid;
+  grid-template-columns: 9rem 9rem;
+  column-gap: 5rem;
+  /* grid-auto-rows: 3rem; */
+  row-gap: 1rem;
+}
+
+.nom_ingredient {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.nbr_ingredient {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  opacity: .7;
 }
