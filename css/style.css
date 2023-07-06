@@ -159,6 +159,8 @@ main {
 
 .filtre_ingredients {
   display: none;
+  font-family: 'Manrope', sans-serif;
+  font-size: .95rem;
   width: 10rem;
   position: absolute;
   background-color: var(--white-color);
@@ -166,10 +168,20 @@ main {
   border-radius: .5rem;
   top: 2rem;
   z-index: 2;
+}
+
+.filtre_ingredients p {
+  margin-bottom: .3rem;
+}
+
+.filtre_ingredients p:hover {
+  background-color: var(--yellow-color);
 }
 
 .filtre_appareils {
   display: none;
+  font-family: 'Manrope', sans-serif;
+  font-size: .95rem;
   width: 10rem;
   position: absolute;
   background-color: var(--white-color);
@@ -179,8 +191,18 @@ main {
   z-index: 2;
 }
 
+.filtre_appareils p {
+  margin-bottom: .3rem;
+}
+
+.filtre_appareils p:hover {
+  background-color: var(--yellow-color);
+}
+
 .filtre_ustensiles {
   display: none;
+  font-family: 'Manrope', sans-serif;
+  font-size: .95rem;
   width: 10rem;
   position: absolute;
   background-color: var(--white-color);
@@ -188,6 +210,14 @@ main {
   border-radius: .5rem;
   top: 2rem;
   z-index: 2;
+}
+
+.filtre_ustensiles p {
+  margin-bottom: .3rem;
+}
+
+.filtre_ustensiles p:hover {
+  background-color: var(--yellow-color);
 }
 
 #ingredients_search {

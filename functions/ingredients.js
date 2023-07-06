@@ -1,4 +1,4 @@
-export const clickIngredients = () => {
+export const ingredients = () => {
   const btnIngredients = document.querySelector(".btn_ingredients");
   const filtreIngredients = document.querySelector(".filtre_ingredients");
   const chevronUpIngredients = document.querySelector(".chevron_up_ingredients");

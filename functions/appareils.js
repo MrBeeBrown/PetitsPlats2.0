@@ -1,4 +1,4 @@
-export const clickAppareils = () => {
+export const appareils = () => {
   const btnAppareils = document.querySelector(".btn_appareils");
   const filtreAppareils = document.querySelector(".filtre_appareils");
   const chevronUpAppareils = document.querySelector(".chevron_up_appareils");
