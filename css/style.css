@@ -180,7 +180,7 @@ main {
 }
 
 .container_ingredients {
-  height: 300px;
+  height: 16rem;
   overflow-y: auto;
 }
 
@@ -207,7 +207,7 @@ main {
 }
 
 .container_appareils {
-  height: 300px;
+  height: 16rem;
   overflow-y: auto;
 }
 
@@ -234,7 +234,7 @@ main {
 }
 
 .container_ustensiles {
-  height: 300px;
+  height: 16rem;
   overflow-y: auto;
 }
 
