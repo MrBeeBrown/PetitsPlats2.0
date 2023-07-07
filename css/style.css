@@ -160,7 +160,7 @@ main {
 .filtre_ingredients {
   display: none;
   font-family: 'Manrope', sans-serif;
-  font-size: .95rem;
+  font-size: .85rem;
   width: 10rem;
   position: absolute;
   background-color: var(--white-color);
@@ -171,17 +171,23 @@ main {
 }
 
 .filtre_ingredients p {
-  margin-bottom: .3rem;
+  margin: 0 0 .3rem .6rem;
 }
 
 .filtre_ingredients p:hover {
   background-color: var(--yellow-color);
+  cursor: pointer;
+}
+
+.container_ingredients {
+  height: 300px;
+  overflow-y: auto;
 }
 
 .filtre_appareils {
   display: none;
   font-family: 'Manrope', sans-serif;
-  font-size: .95rem;
+  font-size: .85rem;
   width: 10rem;
   position: absolute;
   background-color: var(--white-color);
@@ -192,17 +198,23 @@ main {
 }
 
 .filtre_appareils p {
-  margin-bottom: .3rem;
+  margin: 0 0 .3rem .6rem;
 }
 
 .filtre_appareils p:hover {
   background-color: var(--yellow-color);
+  cursor: pointer;
+}
+
+.container_appareils {
+  height: 300px;
+  overflow-y: auto;
 }
 
 .filtre_ustensiles {
   display: none;
   font-family: 'Manrope', sans-serif;
-  font-size: .95rem;
+  font-size: .85rem;
   width: 10rem;
   position: absolute;
   background-color: var(--white-color);
@@ -213,11 +225,17 @@ main {
 }
 
 .filtre_ustensiles p {
-  margin-bottom: .3rem;
+  margin: 0 0 .3rem .6rem;
 }
 
 .filtre_ustensiles p:hover {
   background-color: var(--yellow-color);
+  cursor: pointer;
+}
+
+.container_ustensiles {
+  height: 300px;
+  overflow-y: auto;
 }
 
 #ingredients_search {

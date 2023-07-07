@@ -1,3 +1,5 @@
+import { sortItems } from "./filtre.js";
+
 export const ustensiles = () => {
   const btnUstensils = document.querySelector(".btn_ustensiles");
   const filtreUstensils = document.querySelector(".filtre_ustensiles");
@@ -21,31 +23,21 @@ export const ustensiles = () => {
 export const recipesUstensiles = (data) => {
   const recipesUstensilesItems = [];
   const ustensilesContainer = document.querySelector(".filtre_ustensiles");
+  const container = document.createElement("div");
+  container.setAttribute("class", "container_ustensiles");
   data.forEach(element => {
     for (let i = 0; i < element.ustensils.length; i++) {
-      if (!recipesUstensilesItems.includes(element.ustensils[i].toLowerCase())) {
-        recipesUstensilesItems.push(element.ustensils[i].toLowerCase());
+      const capitalized = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1);
+      if (!recipesUstensilesItems.includes(capitalized)) {
+        recipesUstensilesItems.push(capitalized);
       }
     }
   });
-  const sortedUstensils = sortUstensiles(recipesUstensilesItems);
+  const sortedUstensils = sortItems(recipesUstensilesItems);
   sortedUstensils.forEach(e => {
     const p = document.createElement("p");
     p.innerHTML = `${e}`;
-    ustensilesContainer.appendChild(p);
+    container.appendChild(p);
   })
-}
-
-const sortUstensiles = (items) => {
-  const sortedItems = items.sort((a, b) => {
-    if (a < b) {
-      return -1;
-    }
-
-    if (a > b) {
-      return 1;
-    }
-    return 0;
-  })
-  return sortedItems;
+  ustensilesContainer.appendChild(container);
 }

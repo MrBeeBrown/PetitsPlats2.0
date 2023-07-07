@@ -1,3 +1,5 @@
+import { sortItems } from "./filtre.js";
+
 export const appareils = () => {
   const btnAppareils = document.querySelector(".btn_appareils");
   const filtreAppareils = document.querySelector(".filtre_appareils");
@@ -16,4 +18,23 @@ export const appareils = () => {
       chevronDownAppareils.style.display = "none";
     }
   })
+}
+
+export const recipesAppareils = (data) => {
+  const recipesAppareilsItems = [];
+  const appareilsContainer = document.querySelector(".filtre_appareils");
+  const container = document.createElement("div");
+  container.setAttribute("class", "container_appareils");
+  data.forEach(element => {
+    if (!recipesAppareilsItems.includes(element.appliance)) {
+      recipesAppareilsItems.push(element.appliance);
+    }
+  });
+  const sortedAppareils = sortItems(recipesAppareilsItems);
+  sortedAppareils.forEach(e => {
+    const p = document.createElement("p");
+    p.innerHTML = `${e}`;
+    container.appendChild(p);
+  })
+  appareilsContainer.appendChild(container);
 }

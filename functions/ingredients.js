@@ -1,3 +1,5 @@
+import { sortItems } from "./filtre.js";
+
 export const ingredients = () => {
   const btnIngredients = document.querySelector(".btn_ingredients");
   const filtreIngredients = document.querySelector(".filtre_ingredients");
@@ -16,4 +18,26 @@ export const ingredients = () => {
       chevronDownIngredients.style.display = "none";
     }
   })
+}
+
+export const recipesIngredients = (data) => {
+  const recipesIngredientsItems = [];
+  const ingredientsContainer = document.querySelector(".filtre_ingredients");
+  const container = document.createElement("div");
+  container.setAttribute("class", "container_ingredients");
+  data.forEach(element => {
+    for (let i = 0; i < element.ingredients.length; i++) {
+      const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1);
+      if (!recipesIngredientsItems.includes(capitalized)) {
+        recipesIngredientsItems.push(capitalized);
+      }
+    }
+  });
+  const sortedIngredients = sortItems(recipesIngredientsItems);
+  sortedIngredients.forEach(e => {
+    const p = document.createElement("p");
+    p.innerHTML = `${e}`;
+    container.appendChild(p);
+  })
+  ingredientsContainer.appendChild(container);
 }
