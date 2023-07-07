@@ -27,7 +27,7 @@ export const recipesUstensiles = (data) => {
   container.setAttribute("class", "container_ustensiles");
   data.forEach(element => {
     for (let i = 0; i < element.ustensils.length; i++) {
-      const capitalized = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1);
+      const capitalized = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1).toLowerCase();
       if (!recipesUstensilesItems.includes(capitalized)) {
         recipesUstensilesItems.push(capitalized);
       }
