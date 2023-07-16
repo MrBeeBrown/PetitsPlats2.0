@@ -82,8 +82,18 @@ main {
 
 .filtres {
   display: flex;
+  flex-direction: column;
+}
+
+.filtre_selection {
+  display: flex;
   justify-content: space-between;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
+}
+
+.filtre_resultat {
+  display: flex;
+  margin-bottom: 1rem;
 }
 
 .selections {

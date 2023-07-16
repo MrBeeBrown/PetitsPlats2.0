@@ -36,8 +36,22 @@ export const recipesUstensiles = (data) => {
   const sortedUstensils = sortItems(recipesUstensilesItems);
   sortedUstensils.forEach(e => {
     const p = document.createElement("p");
+    p.classList.add("ustensils_items");
     p.innerHTML = `${e}`;
     container.appendChild(p);
   })
   ustensilesContainer.appendChild(container);
+}
+
+export const searchUstensiles = (data) => {
+  const searchInput = document.querySelector("#ustensiles_search");
+  const searchData = document.querySelectorAll(".ustensils_items");
+  const result = document.querySelector(".filtre_resultat");
+  searchInput.addEventListener("input", () => {
+    searchData.forEach(e => {
+      if (e.innerText.toLowerCase().includes(searchData.value)) {
+        console.log(e.innerText);
+      }
+    })
+  })
 }

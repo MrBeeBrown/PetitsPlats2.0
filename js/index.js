@@ -1,10 +1,7 @@
 import { Recette } from "./recette.js";
-import { ustensiles } from "../functions/ustensiles.js";
-import { recipesUstensiles } from "../functions/ustensiles.js";
-import { appareils } from "../functions/appareils.js";
-import { recipesAppareils } from "../functions/appareils.js";
-import { ingredients } from "../functions/ingredients.js";
-import { recipesIngredients } from "../functions/ingredients.js";
+import { ustensiles, recipesUstensiles, searchUstensiles } from "../functions/ustensiles.js";
+import { appareils, recipesAppareils } from "../functions/appareils.js";
+import { ingredients, recipesIngredients } from "../functions/ingredients.js";
 
 //Affichage du nombre de recettes
 const nbrRecettes = document.querySelector(".nbr_recettes");
@@ -33,5 +30,7 @@ recipesAppareils(recipes);
 
 //Ajout des ingredients dans la recherche ingredients
 recipesIngredients(recipes);
+
+searchUstensiles();
 
 console.log(recipes)
