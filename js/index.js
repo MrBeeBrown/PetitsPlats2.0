@@ -31,6 +31,7 @@ recipesAppareils(recipes);
 //Ajout des ingredients dans la recherche ingredients
 recipesIngredients(recipes);
 
-searchUstensiles();
+//Recherche des ustensiles
+searchUstensiles(recipes);
 
 console.log(recipes)

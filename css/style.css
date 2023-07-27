@@ -96,6 +96,27 @@ main {
   margin-bottom: 1rem;
 }
 
+.filtre_element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0 .5rem;
+  padding: .5rem .5rem .5rem .5rem;
+  background-color: var(--yellow-color);
+  border-radius: .5rem;
+}
+
+.filtre_element_text {
+  font-size: .9rem;
+  font-family: 'Manrope', sans-serif;
+  margin-right: .5rem;
+}
+
+.xmark {
+  margin-left: .5rem;
+  cursor: pointer;
+}
+
 .selections {
   display: flex;
   gap: 2rem;
@@ -186,6 +207,7 @@ main {
 
 .filtre_ingredients p:hover {
   background-color: var(--yellow-color);
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -213,6 +235,7 @@ main {
 
 .filtre_appareils p:hover {
   background-color: var(--yellow-color);
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -240,6 +263,7 @@ main {
 
 .filtre_ustensiles p:hover {
   background-color: var(--yellow-color);
+  font-weight: 700;
   cursor: pointer;
 }
 

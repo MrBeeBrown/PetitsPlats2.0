@@ -5,6 +5,7 @@ export const appareils = () => {
   const filtreAppareils = document.querySelector(".filtre_appareils");
   const chevronUpAppareils = document.querySelector(".chevron_up_appareils");
   const chevronDownAppareils = document.querySelector(".chevron_down_appareils");
+
   btnAppareils.addEventListener("click", () => {
     filtreAppareils.style.display = "block";
     chevronUpAppareils.style.display = "none";
@@ -24,15 +25,18 @@ export const recipesAppareils = (data) => {
   const recipesAppareilsItems = [];
   const appareilsContainer = document.querySelector(".filtre_appareils");
   const container = document.createElement("div");
+
   container.setAttribute("class", "container_appareils");
   data.forEach(element => {
     if (!recipesAppareilsItems.includes(element.appliance)) {
       recipesAppareilsItems.push(element.appliance);
     }
   });
+
   const sortedAppareils = sortItems(recipesAppareilsItems);
   sortedAppareils.forEach(e => {
     const p = document.createElement("p");
+    p.classList.add("appareils_items");
     p.innerHTML = `${e}`;
     container.appendChild(p);
   })

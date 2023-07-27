@@ -5,6 +5,7 @@ export const ingredients = () => {
   const filtreIngredients = document.querySelector(".filtre_ingredients");
   const chevronUpIngredients = document.querySelector(".chevron_up_ingredients");
   const chevronDownIngredients = document.querySelector(".chevron_down_ingredients");
+
   btnIngredients.addEventListener("click", () => {
     filtreIngredients.style.display = "block";
     chevronUpIngredients.style.display = "none";
@@ -24,6 +25,7 @@ export const recipesIngredients = (data) => {
   const recipesIngredientsItems = [];
   const ingredientsContainer = document.querySelector(".filtre_ingredients");
   const container = document.createElement("div");
+
   container.setAttribute("class", "container_ingredients");
   data.forEach(element => {
     for (let i = 0; i < element.ingredients.length; i++) {
@@ -33,6 +35,7 @@ export const recipesIngredients = (data) => {
       }
     }
   });
+
   const sortedIngredients = sortItems(recipesIngredientsItems);
   sortedIngredients.forEach(e => {
     const p = document.createElement("p");
