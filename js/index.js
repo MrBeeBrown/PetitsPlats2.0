@@ -1,7 +1,5 @@
 import { Recette } from "./recette.js";
 import { ustensiles, recipesUstensiles, searchUstensiles } from "../functions/ustensiles.js";
-import { appareils, recipesAppareils } from "../functions/appareils.js";
-import { ingredients, recipesIngredients } from "../functions/ingredients.js";
 
 //Affichage du nombre de recettes
 const nbrRecettes = document.querySelector(".nbr_recettes");
@@ -19,17 +17,9 @@ recipes.forEach(element => {
 
 //Ajout des events pour les filtres
 ustensiles();
-appareils();
-ingredients();
 
 //Ajout des ustensiles dans la recherche ustensiles
 recipesUstensiles(recipes);
-
-//Ajout des appareils dans la recherche appareils
-recipesAppareils(recipes);
-
-//Ajout des ingredients dans la recherche ingredients
-recipesIngredients(recipes);
 
 //Recherche des ustensiles
 searchUstensiles(recipes);
