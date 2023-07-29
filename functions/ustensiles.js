@@ -1,5 +1,3 @@
-import { sortItems } from "./filtre.js";
-
 export const ustensiles = () => {
   const btnUstensils = document.querySelector(".btn_ustensiles");
   const filtreUstensils = document.querySelector(".filtre_ustensiles");
