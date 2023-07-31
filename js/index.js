@@ -1,5 +1,5 @@
 import { Recette } from "./class/recette.js";
-import { Filter } from "./class/filter.js";
+import { Filter } from "./class/dropdown.js";
 import { countRecipes } from "./functions/countRecipes.js";
 
 //Affichage du nombre de recettes
