@@ -1,13 +1,9 @@
 import { Recette } from "./class/recette.js";
 import { Filter } from "./class/filter.js";
+import { showRecipes } from "./functions/showRecipes.js";
 
 //Affichage du nombre de recettes
-const nbrRecettes = document.querySelector(".nbr_recettes");
-if (recipes.length <= 1) {
-  nbrRecettes.innerText = recipes.length + " " + "recette";
-} else {
-  nbrRecettes.innerText = recipes.length + " " + "recettes";
-}
+showRecipes(recipes);
 
 //Affichage des recettes
 recipes.forEach(element => {
