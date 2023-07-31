@@ -1,6 +1,7 @@
 import { Recette } from "./class/recette.js";
-import { Filter } from "./class/dropdown.js";
+import { Filter } from "./class/filterMenu.js";
 import { countRecipes } from "./functions/countRecipes.js";
+import { removeFilter } from "./functions/removeFilter.js";
 
 //Affichage du nombre de recettes
 countRecipes(recipes);
@@ -17,4 +18,6 @@ ustensiles.show();
 ustensiles.hydrate(recipes);
 ustensiles.select();
 
-/* console.log(recipes) */
+removeFilter();
+
+console.log(recipes)

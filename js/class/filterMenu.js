@@ -39,22 +39,20 @@ export class Filter {
           }
         }
       }
-      /* if (this.name == "appareils") {
-        for (let i = 0; i < element.appliance.length; i++) {
-          const capitalized = element.appliance[i].charAt(0).toUpperCase() + element.appliance[i].slice(1).toLowerCase();
-          if (!recipesItems.includes(capitalized)) {
-            recipesItems.push(capitalized);
-          }
-        }
-      }
-      if (this.name == "ingredients") {
-        for (let i = 0; i < element.ingredients.length; i++) {
-          const capitalized = element.ingredients[i].charAt(0).toUpperCase() + element.ingredients[i].slice(1).toLowerCase();
-          if (!recipesItems.includes(capitalized)) {
-            recipesItems.push(capitalized);
-          }
-        }
-      } */
+      /*  if (this.name == "appareils") {
+         const capitalized = element.appliance.charAt(0).toUpperCase() + element.appliance.slice(1).toLowerCase();
+         if (!recipesItems.includes(capitalized)) {
+           recipesItems.push(capitalized);
+         }
+       }
+       if (this.name == "ingredients") {
+         for (let i = 0; i < element.ingredients.length; i++) {
+           const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
+           if (!recipesItems.includes(capitalized)) {
+             recipesItems.push(capitalized);
+           }
+         }
+       } */
     });
 
     const sorted = sortItems(recipesItems);
@@ -88,16 +86,11 @@ export class Filter {
         const content = `
       <div class="filtre_element filtre_${elementContent}">
         <p class="filtre_element_text">${element.innerText}</p>
-        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" class="xmark close_${elementContent}"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" class="xmark"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
       </div>
       `
         if (!result.textContent.includes(elementContent)) {
           result.innerHTML += content;
-          const remove = document.querySelector(`.close_${elementContent}`);
-          remove.addEventListener("click", () => {
-            const removeItem = remove.closest(`.filtre_element`);
-            result.removeChild(removeItem);
-          })
         }
       })
     })
