@@ -1,5 +1,5 @@
-import { Recette } from "./classe/recette.js";
-import { Filter } from "./classe/Filter.js";
+import { Recette } from "./class/recette.js";
+import { Filter } from "./class/filter.js";
 
 //Affichage du nombre de recettes
 const nbrRecettes = document.querySelector(".nbr_recettes");
@@ -20,8 +20,5 @@ ustensiles.hide();
 ustensiles.show();
 ustensiles.hydrate(recipes);
 ustensiles.search();
-
-/* //Recherche des ustensiles
-searchUstensiles(recipes); */
 
 console.log(recipes)
