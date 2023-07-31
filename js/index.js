@@ -12,12 +12,12 @@ recipes.forEach(element => {
   ficheRecette.print();
 });
 
+//Création du filtre ustensiles
 const ustensiles = new Filter("ustensils");
 ustensiles.hide();
 ustensiles.show();
 ustensiles.hydrate(recipes);
 ustensiles.select();
 
+//Suppression des éléments du filtre
 removeFilter();
-
-console.log(recipes)
