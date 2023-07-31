@@ -10,8 +10,8 @@ export class Filter {
   show() {
     this.button.addEventListener("click", () => {
       this.filtre.style.display = "block";
-      this.chevronUp.style.display = "none";
-      this.chevronDown.style.display = "block";
+      this.chevronUp.style.display = "block";
+      this.chevronDown.style.display = "none";
     })
   }
 
@@ -19,25 +19,42 @@ export class Filter {
     document.addEventListener("click", (e) => {
       if (!e.target.closest(`.${this.name}`)) {
         this.filtre.style.display = "none";
-        this.chevronUp.style.display = "block";
-        this.chevronDown.style.display = "none";
+        this.chevronUp.style.display = "none";
+        this.chevronDown.style.display = "block";
       }
     })
   }
 
   hydrate(data) {
     const recipesItems = [];
-    const ustensilesContainer = document.querySelector(`.filtre_${this.name}`);
-    const container = document.createElement("div");
+    const filtre = document.querySelector(`.filtre_${this.name}`);
+    const container = document.querySelector(`.container_${this.name}`);
 
-    container.setAttribute("class", `container_${this.name}`);
     data.forEach(element => {
-      for (let i = 0; i < element.ustensils.length; i++) {
-        const capitalized = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1).toLowerCase();
-        if (!recipesItems.includes(capitalized)) {
-          recipesItems.push(capitalized);
+      if (this.name == "ustensils") {
+        for (let i = 0; i < element.ustensils.length; i++) {
+          const capitalized = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1).toLowerCase();
+          if (!recipesItems.includes(capitalized)) {
+            recipesItems.push(capitalized);
+          }
         }
       }
+      /* if (this.name == "appareils") {
+        for (let i = 0; i < element.appliance.length; i++) {
+          const capitalized = element.appliance[i].charAt(0).toUpperCase() + element.appliance[i].slice(1).toLowerCase();
+          if (!recipesItems.includes(capitalized)) {
+            recipesItems.push(capitalized);
+          }
+        }
+      }
+      if (this.name == "ingredients") {
+        for (let i = 0; i < element.ingredients.length; i++) {
+          const capitalized = element.ingredients[i].charAt(0).toUpperCase() + element.ingredients[i].slice(1).toLowerCase();
+          if (!recipesItems.includes(capitalized)) {
+            recipesItems.push(capitalized);
+          }
+        }
+      } */
     });
 
     const sorted = sortItems(recipesItems);
@@ -47,10 +64,10 @@ export class Filter {
       p.innerHTML = `${e}`;
       container.appendChild(p);
     })
-    ustensilesContainer.appendChild(container);
+    filtre.appendChild(container);
   }
 
-  select() {
+  search() {
     const searchInput = document.querySelector(`#${this.name}_search`);
     const searchData = document.querySelectorAll(`.${this.name}_items`);
     const result = document.querySelector(".filtre_resultat");
@@ -76,18 +93,14 @@ export class Filter {
       `
         if (!result.textContent.includes(elementContent)) {
           result.innerHTML += content;
-          const removeUstensile = document.querySelector(`.close_${elementContent}`);
-          removeUstensile.addEventListener("click", () => {
-            const removeItem = document.querySelector(`.filtre_${elementContent}`);
+          const remove = document.querySelector(`.close_${elementContent}`);
+          remove.addEventListener("click", () => {
+            const removeItem = remove.closest(`.filtre_element`);
             result.removeChild(removeItem);
           })
         }
       })
     })
-  }
-
-  remove() {
-
   }
 }
 

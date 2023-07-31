@@ -133,7 +133,7 @@ main {
   width: 10rem;
 }
 
-.ustensiles {
+.ustensils {
   position: relative;
   width: 10rem;
 }
@@ -150,7 +150,7 @@ main {
   top: 1rem;
 }
 
-.chevron_down_ustensiles {
+.chevron_down_ustensils {
   position: absolute;
   right: .6rem;
   top: 1rem;
@@ -170,7 +170,7 @@ main {
   top: 1rem;
 }
 
-.chevron_up_ustensiles {
+.chevron_up_ustensils {
   display: none;
   position: absolute;
   right: .6rem;
@@ -244,7 +244,7 @@ main {
   overflow-y: auto;
 }
 
-.filtre_ustensiles {
+.filtre_ustensils {
   display: none;
   font-family: 'Manrope', sans-serif;
   font-size: .85rem;
@@ -257,17 +257,17 @@ main {
   z-index: 2;
 }
 
-.filtre_ustensiles p {
+.filtre_ustensils p {
   margin: 0 0 .3rem .6rem;
 }
 
-.filtre_ustensiles p:hover {
+.filtre_ustensils p:hover {
   background-color: var(--yellow-color);
   font-weight: 700;
   cursor: pointer;
 }
 
-.container_ustensiles {
+.container_ustensils {
   height: 16rem;
   overflow-y: auto;
 }
@@ -290,7 +290,7 @@ main {
   border-radius: .2rem;
 }
 
-#ustensiles_search {
+#ustensils_search {
   display: block;
   width: 9rem;
   height: 2rem;
