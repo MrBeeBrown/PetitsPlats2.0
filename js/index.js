@@ -1,9 +1,9 @@
 import { Recette } from "./class/recette.js";
 import { Filter } from "./class/filter.js";
-import { showRecipes } from "./functions/showRecipes.js";
+import { countRecipes } from "./functions/countRecipes.js";
 
 //Affichage du nombre de recettes
-showRecipes(recipes);
+countRecipes(recipes);
 
 //Affichage des recettes
 recipes.forEach(element => {
@@ -15,6 +15,6 @@ const ustensiles = new Filter("ustensils");
 ustensiles.hide();
 ustensiles.show();
 ustensiles.hydrate(recipes);
-ustensiles.search();
+ustensiles.select();
 
-console.log(recipes)
+/* console.log(recipes) */

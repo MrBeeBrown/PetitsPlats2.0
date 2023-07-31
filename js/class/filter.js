@@ -67,7 +67,7 @@ export class Filter {
     filtre.appendChild(container);
   }
 
-  search() {
+  select() {
     const searchInput = document.querySelector(`#${this.name}_search`);
     const searchData = document.querySelectorAll(`.${this.name}_items`);
     const result = document.querySelector(".filtre_resultat");
