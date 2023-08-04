@@ -1,7 +1,6 @@
 import { Recette } from "./class/recette.js";
 import { Filter } from "./class/filterMenu.js";
 import { countRecipes } from "./functions/countRecipes.js";
-import { removeFilter } from "./functions/removeFilter.js";
 
 //Affichage du nombre de recettes
 countRecipes(recipes);
@@ -13,11 +12,9 @@ recipes.forEach(element => {
 });
 
 //Création du filtre ustensiles
-const ustensiles = new Filter("ustensils");
-ustensiles.hide();
-ustensiles.show();
+const ustensiles = new Filter("ustensils", recipes);
 ustensiles.hydrate(recipes);
-ustensiles.select();
+ustensiles.start();
+ustensiles.addTag();
 
-//Suppression des éléments du filtre
-removeFilter();
+console.log(recipes);
