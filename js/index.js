@@ -1,5 +1,7 @@
-import { Recette } from "./class/recette.js";
-import { Filter } from "./class/filterMenu.js";
+import { Recette } from "./class/Recette.js";
+import { Ustensils } from "./class/Ustensils.js";
+import { Ingredients } from "./class/Ingredients.js";
+import { Appareils } from "./class/Appareils.js";
 import { countRecipes } from "./functions/countRecipes.js";
 
 //Affichage du nombre de recettes
@@ -12,13 +14,13 @@ recipes.forEach(element => {
 });
 
 //Création du filtre ustensiles
-const ustensiles = new Filter("ustensils", recipes);
-ustensiles.hydrate(recipes, "ustensils");
+const ustensiles = new Ustensils("ustensils", recipes);
+ustensiles.hydrate(recipes);
 ustensiles.start();
 ustensiles.addTag();
 
 /* //Création du filtre ingrédients
 const ingredients = new Filter("ingredients", recipes);
-ingredients.hydrate(recipes, "ingredients");
+ingredients.hydrate(recipes);
 ingredients.start();
 ingredients.addTag(); */

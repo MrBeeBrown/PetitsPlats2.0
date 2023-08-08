@@ -1,5 +1,7 @@
-import { Recette } from "./recette.js";
+import { Recette } from "./Recette.js";
 import { countRecipes } from "../functions/countRecipes.js";
+/* import { sortItems } from "../functions/sortItems.js";
+import { transformToLowerCase } from "../functions/transformToLowerCase.js"; */
 
 export class Filter {
   constructor(name, recipes) {
@@ -48,43 +50,12 @@ export class Filter {
     }
   }
 
-  hydrate(data) {
-    data.forEach(element => {
-      //Hydrate ustensils
-      if (this.name == "ustensils") {
-        for (let i = 0; i < element.ustensils.length; i++) {
-          const capitalized = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1).toLowerCase();
-          if (!this.recipesItems.includes(capitalized)) this.recipesItems.push(capitalized);
-        }
-      }
+  hideEmptyFilter() {
+    document.querySelector(`.element_vide_${this.name}`).classList.add('hidden');
+  }
 
-      /* //Hydrate appliance
-      if (this.name == "appareils") {
-       const capitalized = element.appliance.charAt(0).toUpperCase() + element.appliance.slice(1).toLowerCase();
-        if (!this.recipesItems.includes(capitalized)) {
-          this.recipesItems.push(capitalized);
-         }
-      } */
-
-      //Hydrate ingredients
-      if (this.name == "ingredients") {
-        for (let i = 0; i < element.ingredients.length; i++) {
-          const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
-          if (!this.recipesItems.includes(capitalized)) this.recipesItems.push(capitalized);
-        }
-      }
-    });
-
-    //Update the list of elements (ustensils, ingredients and appliance)
-    const sorted = sortItems(this.recipesItems);
-    this.container.innerHTML = ``;
-    sorted.forEach(e => {
-      const p = document.createElement("p");
-      p.classList.add(`${this.name}_items`);
-      p.innerHTML = `${e}`;
-      this.container.appendChild(p);
-    })
-    this.filtre.appendChild(this.container);
+  showEmptyFilter() {
+    document.querySelector(`.element_vide_${this.name}`).classList.remove('hidden');
   }
 
   filter() {
@@ -94,15 +65,11 @@ export class Filter {
       if (!e.innerText.toLowerCase().includes(this.searchInput.value)) {
         e.style.display = "none";
         if (this.container.innerText === '') {
-          const emptyString = `<p class="element_vide">Aucun élément trouvé</p>`;
-          this.container.innerHTML += (emptyString);
+          this.showEmptyFilter();
         }
       } else {
         e.style.display = "block";
-        if (document.querySelector('.element_vide')) {
-          const removeElement = document.querySelector('.element_vide');
-          removeElement.remove();
-        }
+        this.hideEmptyFilter();
       }
     })
   }
@@ -125,6 +92,8 @@ export class Filter {
         }
       })
     })
+
+    //TODO : Remove Tag goes here
   }
 
   removeTag(element) {
@@ -136,28 +105,6 @@ export class Filter {
       if (this.tagElement.length === 0) this.printRecipes(this.recipes);
       else this.filterRecipes(this.tagElement);
     }
-  }
-
-  filterRecipes(tagElement) {
-    //Sort the recipes by selected tag
-    this.newRecipesList = [];
-    this.recipes.forEach(recipes => {
-      this.newList = [];
-      this.flag = 0;
-      const newTagElement = toLowerCase(tagElement);
-      if (this.name === 'ustensils') this.newList = toLowerCase(recipes.ustensils);
-      if (this.name === 'ingredients') {
-        for (let i = 0; i < recipes.ingredients.length; i++) {
-          this.newList.push(recipes.ingredients[i].ingredient);
-        }
-        this.newList = toLowerCase(this.newList);
-      }
-      newTagElement.forEach(e => {
-        if (this.newList.includes(e)) this.flag++;
-      })
-      if (this.flag === newTagElement.length) this.newRecipesList.push(recipes);
-    })
-    this.printRecipes(this.newRecipesList);
   }
 
   printRecipes(newRecipes) {
@@ -172,26 +119,4 @@ export class Filter {
     this.addTag();
     countRecipes(newRecipes);
   }
-}
-
-function sortItems(items) {
-  //Sort function
-  return items.sort((a, b) => {
-    if (a < b) {
-      return -1;
-    }
-    if (a > b) {
-      return 1;
-    }
-    return 0;
-  })
-}
-
-function toLowerCase(elements) {
-  //Function for lowercase
-  let newElements = [];
-  elements.forEach((item) => {
-    newElements.push(item.toLowerCase());
-  })
-  return newElements;
 }
