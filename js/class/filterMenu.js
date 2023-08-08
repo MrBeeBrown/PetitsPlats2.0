@@ -9,7 +9,7 @@ export class Filter {
     this.filtre = document.querySelector(`.filtre_${this.name}`)
     this.chevronUp = document.querySelector(`.chevron_up_${this.name}`)
     this.chevronDown = document.querySelector(`.chevron_down_${this.name}`)
-    this.filtre = document.querySelector(`.filtre_${this.name}`);
+    this.filtre = document.querySelector(`.filtre_${this.name}`)
     this.container = document.querySelector(`.container_${this.name}`)
     this.recipesItems = []
     this.searchInput = document.querySelector(`#${this.name}_search`)
@@ -17,6 +17,8 @@ export class Filter {
     this.tagElement = []
     this.newRecipesList = []
     this.espaceRecipes = document.querySelector('.liste_recettes')
+    this.newList = []
+    this.flag = 0
   }
 
   start() {
@@ -31,12 +33,14 @@ export class Filter {
   }
 
   open() {
+    //Open dropdown menu
     this.filtre.style.display = "block";
     this.chevronUp.style.display = "block";
     this.chevronDown.style.display = "none";
   }
 
   close(element) {
+    //Close dropdown menu
     if (!element.target.closest(`.${this.name}`)) {
       this.filtre.style.display = "none";
       this.chevronUp.style.display = "none";
@@ -46,30 +50,32 @@ export class Filter {
 
   hydrate(data) {
     data.forEach(element => {
+      //Hydrate ustensils
       if (this.name == "ustensils") {
         for (let i = 0; i < element.ustensils.length; i++) {
           const capitalized = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1).toLowerCase();
-          if (!this.recipesItems.includes(capitalized)) {
-            this.recipesItems.push(capitalized);
-          }
+          if (!this.recipesItems.includes(capitalized)) this.recipesItems.push(capitalized);
         }
       }
-      /*  if (this.name == "appareils") {
-        const capitalized = element.appliance.charAt(0).toUpperCase() + element.appliance.slice(1).toLowerCase();
-         if (!recipesItems.includes(capitalized)) {
-           recipesItems.push(capitalized);
-          }
-       }
-       if (this.name == "ingredients") {
-         for (let i = 0; i < element.ingredients.length; i++) {
-           const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
-           if (!recipesItems.includes(capitalized)) {
-             recipesItems.push(capitalized);
-            }
-          }
-        } */
+
+      /* //Hydrate appliance
+      if (this.name == "appareils") {
+       const capitalized = element.appliance.charAt(0).toUpperCase() + element.appliance.slice(1).toLowerCase();
+        if (!this.recipesItems.includes(capitalized)) {
+          this.recipesItems.push(capitalized);
+         }
+      } */
+
+      //Hydrate ingredients
+      if (this.name == "ingredients") {
+        for (let i = 0; i < element.ingredients.length; i++) {
+          const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
+          if (!this.recipesItems.includes(capitalized)) this.recipesItems.push(capitalized);
+        }
+      }
     });
 
+    //Update the list of elements (ustensils, ingredients and appliance)
     const sorted = sortItems(this.recipesItems);
     this.container.innerHTML = ``;
     sorted.forEach(e => {
@@ -82,11 +88,12 @@ export class Filter {
   }
 
   filter() {
+    //Research elements in the filter
     const searchData = document.querySelectorAll(`.${this.name}_items`);
     searchData.forEach(e => {
       if (!e.innerText.toLowerCase().includes(this.searchInput.value)) {
         e.style.display = "none";
-        if (this.container.innerText == '') {
+        if (this.container.innerText === '') {
           const emptyString = `<p class="element_vide">Aucun élément trouvé</p>`;
           this.container.innerHTML += (emptyString);
         }
@@ -101,6 +108,7 @@ export class Filter {
   }
 
   addTag() {
+    //Add tag
     const searchData = document.querySelectorAll(`.${this.name}_items`);
     searchData.forEach(element => {
       element.addEventListener("click", () => {
@@ -113,42 +121,47 @@ export class Filter {
         if (!this.result.textContent.includes(element.innerText)) {
           this.result.innerHTML += content;
           this.tagElement.push(element.innerText);
-          this.filteredTag(this.tagElement);
+          this.filterRecipes(this.tagElement);
         }
       })
     })
   }
 
   removeTag(element) {
+    //Delete tag
     if (element.target.classList.contains("xmark")) {
       const removeItem = element.target.closest(".filtre_element");
       this.result.removeChild(removeItem);
       this.tagElement = this.tagElement.filter((item) => item !== removeItem.firstElementChild.textContent);
-      if (this.tagElement.length == 0) {
-        this.printRecipes(this.recipes);
-      } else {
-        this.filteredTag(this.tagElement);
-      }
+      if (this.tagElement.length === 0) this.printRecipes(this.recipes);
+      else this.filterRecipes(this.tagElement);
     }
   }
 
-  filteredTag(tagElement) {
+  filterRecipes(tagElement) {
+    //Sort the recipes by selected tag
     this.newRecipesList = [];
     this.recipes.forEach(recipes => {
-      let flag = 0;
+      this.newList = [];
+      this.flag = 0;
       const newTagElement = toLowerCase(tagElement);
-      if (this.name = 'ustensils') {
-        const newList = toLowerCase(recipes.ustensils);
-        newTagElement.forEach(e => {
-          if (newList.includes(e)) flag++;
-        })
+      if (this.name === 'ustensils') this.newList = toLowerCase(recipes.ustensils);
+      if (this.name === 'ingredients') {
+        for (let i = 0; i < recipes.ingredients.length; i++) {
+          this.newList.push(recipes.ingredients[i].ingredient);
+        }
+        this.newList = toLowerCase(this.newList);
       }
-      if (flag === newTagElement.length) this.newRecipesList.push(recipes);
+      newTagElement.forEach(e => {
+        if (this.newList.includes(e)) this.flag++;
+      })
+      if (this.flag === newTagElement.length) this.newRecipesList.push(recipes);
     })
     this.printRecipes(this.newRecipesList);
   }
 
   printRecipes(newRecipes) {
+    //Print the recipes by selected tag
     this.espaceRecipes.innerHTML = ``;
     newRecipes.forEach(item => {
       const ficheRecette = new Recette(item);
@@ -162,6 +175,7 @@ export class Filter {
 }
 
 function sortItems(items) {
+  //Sort function
   return items.sort((a, b) => {
     if (a < b) {
       return -1;
@@ -174,6 +188,7 @@ function sortItems(items) {
 }
 
 function toLowerCase(elements) {
+  //Function for lowercase
   let newElements = [];
   elements.forEach((item) => {
     newElements.push(item.toLowerCase());

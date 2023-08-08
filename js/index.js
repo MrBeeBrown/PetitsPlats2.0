@@ -13,8 +13,12 @@ recipes.forEach(element => {
 
 //Création du filtre ustensiles
 const ustensiles = new Filter("ustensils", recipes);
-ustensiles.hydrate(recipes);
+ustensiles.hydrate(recipes, "ustensils");
 ustensiles.start();
 ustensiles.addTag();
 
-console.log(recipes);
+/* //Création du filtre ingrédients
+const ingredients = new Filter("ingredients", recipes);
+ingredients.hydrate(recipes, "ingredients");
+ingredients.start();
+ingredients.addTag(); */
