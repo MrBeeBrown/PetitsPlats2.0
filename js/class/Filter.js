@@ -1,7 +1,6 @@
 import { Recette } from "./Recette.js";
 import { countRecipes } from "../functions/countRecipes.js";
-/* import { sortItems } from "../functions/sortItems.js";
-import { transformToLowerCase } from "../functions/transformToLowerCase.js"; */
+import { hydrateAllFilter } from "../functions/hydrateAllFilter.js";
 
 export class Filter {
   constructor(name, recipes) {
@@ -30,8 +29,6 @@ export class Filter {
     document.addEventListener("click", (element) => this.close(element));
     //Filter dropdown items
     this.searchInput.addEventListener("input", () => this.filter());
-    //Remove Tag items
-    this.result.addEventListener('click', (element) => this.removeTag(element))
   }
 
   open() {
@@ -89,22 +86,22 @@ export class Filter {
           this.result.innerHTML += content;
           this.tagElement.push(element.innerText);
           this.filterRecipes(this.tagElement);
+          //EventListener to remove tag element
+          const tag = document.querySelectorAll('.filtre_element');
+          if (tag.length > 0) {
+            tag.forEach(item => {
+              const removeTag = item.lastElementChild;
+              removeTag.addEventListener("click", () => {
+                this.result.removeChild(item);
+                this.tagElement = this.tagElement.filter((e) => e !== item.firstElementChild.textContent);
+                if (this.tagElement.length === 0) this.printRecipes(this.recipes);
+                else this.filterRecipes(this.tagElement);
+              })
+            })
+          }
         }
       })
     })
-
-    //TODO : Remove Tag goes here
-  }
-
-  removeTag(element) {
-    //Delete tag
-    if (element.target.classList.contains("xmark")) {
-      const removeItem = element.target.closest(".filtre_element");
-      this.result.removeChild(removeItem);
-      this.tagElement = this.tagElement.filter((item) => item !== removeItem.firstElementChild.textContent);
-      if (this.tagElement.length === 0) this.printRecipes(this.recipes);
-      else this.filterRecipes(this.tagElement);
-    }
   }
 
   printRecipes(newRecipes) {
@@ -115,7 +112,7 @@ export class Filter {
       ficheRecette.print();
     })
     this.recipesItems = [];
-    this.hydrate(newRecipes);
+    hydrateAllFilter(newRecipes);
     this.addTag();
     countRecipes(newRecipes);
   }

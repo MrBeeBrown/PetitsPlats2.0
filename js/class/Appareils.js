@@ -4,17 +4,15 @@ import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Appareils extends Filter {
   constructor(name, recipes) {
-    super(recipes)
+    super(name, recipes)
   }
 
   hydrate(recipes) {
     recipes.forEach(element => {
       //Hydrate appliance
-      if (this.name == "appareils") {
-        const capitalized = element.appliance.charAt(0).toUpperCase() + element.appliance.slice(1).toLowerCase();
-        if (!this.recipesItems.includes(capitalized)) {
-          this.recipesItems.push(capitalized);
-        }
+      const capitalized = element.appliance.charAt(0).toUpperCase() + element.appliance.slice(1).toLowerCase();
+      if (!this.recipesItems.includes(capitalized)) {
+        this.recipesItems.push(capitalized);
       }
     });
 
@@ -43,7 +41,7 @@ export class Appareils extends Filter {
       this.newList = [];
       this.flag = 0;
       const newTagElement = transformToLowerCase(tagElement);
-      if (this.name === 'ustensils') this.newList = transformToLowerCase(recipes.ustensils);
+      this.newList = recipes.appliance.toLowerCase();
       newTagElement.forEach(e => {
         if (this.newList.includes(e)) this.flag++;
       })

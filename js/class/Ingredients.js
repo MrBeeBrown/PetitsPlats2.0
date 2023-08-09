@@ -4,17 +4,15 @@ import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Ingredients extends Filter {
   constructor(name, recipes) {
-    super(recipes)
+    super(name, recipes)
   }
 
   hydrate(recipes) {
     recipes.forEach(element => {
       //Hydrate ingredients
-      if (this.name == "ingredients") {
-        for (let i = 0; i < element.ingredients.length; i++) {
-          const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
-          if (!this.recipesItems.includes(capitalized)) this.recipesItems.push(capitalized);
-        }
+      for (let i = 0; i < element.ingredients.length; i++) {
+        const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
+        if (!this.recipesItems.includes(capitalized)) this.recipesItems.push(capitalized);
       }
     });
 

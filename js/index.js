@@ -19,8 +19,16 @@ ustensiles.hydrate(recipes);
 ustensiles.start();
 ustensiles.addTag();
 
-/* //Création du filtre ingrédients
-const ingredients = new Filter("ingredients", recipes);
+//Création du filtre ingrédients
+const ingredients = new Ingredients("ingredients", recipes);
 ingredients.hydrate(recipes);
 ingredients.start();
-ingredients.addTag(); */
+ingredients.addTag();
+
+//Création du filtre appareils
+const appareils = new Appareils("appareils", recipes);
+appareils.hydrate(recipes);
+appareils.start();
+appareils.addTag();
+
+/* console.log(recipes); */

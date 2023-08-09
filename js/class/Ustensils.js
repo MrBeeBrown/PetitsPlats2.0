@@ -41,7 +41,7 @@ export class Ustensils extends Filter {
       this.newList = [];
       this.flag = 0;
       const newTagElement = transformToLowerCase(tagElement);
-      if (this.name === 'ustensils') this.newList = transformToLowerCase(recipes.ustensils);
+      this.newList = transformToLowerCase(recipes.ustensils);
       newTagElement.forEach(e => {
         if (this.newList.includes(e)) this.flag++;
       })
