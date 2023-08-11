@@ -1,6 +1,7 @@
 import { Recette } from "./Recette.js";
 import { countRecipes } from "../functions/countRecipes.js";
 import { hydrateAllFilter } from "../functions/hydrateAllFilter.js";
+import { addTag } from "../functions/addTag.js";
 
 export class Filter {
   constructor(name, recipes) {
@@ -27,8 +28,6 @@ export class Filter {
     this.button.addEventListener("click", () => this.open());
     //Close dropdown menu
     document.addEventListener("click", (element) => this.close(element));
-    //Filter dropdown items
-    this.searchInput.addEventListener("input", () => this.filter());
   }
 
   open() {
@@ -57,21 +56,24 @@ export class Filter {
 
   filter() {
     //Research elements in the filter
-    const searchData = document.querySelectorAll(`.${this.name}_items`);
-    searchData.forEach(e => {
-      if (!e.innerText.toLowerCase().includes(this.searchInput.value)) {
-        e.style.display = "none";
-        if (this.container.innerText === '') {
-          this.showEmptyFilter();
+    //Filter dropdown items
+    this.searchInput.addEventListener("input", () => {
+      const searchData = document.querySelectorAll(`.${this.name}_items`);
+      searchData.forEach(e => {
+        if (!e.innerText.toLowerCase().includes(this.searchInput.value)) {
+          e.style.display = "none";
+          if (this.container.innerText === '') {
+            this.showEmptyFilter();
+          }
+        } else {
+          e.style.display = "block";
+          this.hideEmptyFilter();
         }
-      } else {
-        e.style.display = "block";
-        this.hideEmptyFilter();
-      }
-    })
+      })
+    });
   }
 
-  addTag() {
+  /* addTag() {
     //Add tag
     const searchData = document.querySelectorAll(`.${this.name}_items`);
     searchData.forEach(element => {
@@ -102,7 +104,7 @@ export class Filter {
         }
       })
     })
-  }
+  } */
 
   printRecipes(newRecipes) {
     //Print the recipes by selected tag
@@ -113,7 +115,9 @@ export class Filter {
     })
     this.recipesItems = [];
     hydrateAllFilter(newRecipes);
-    this.addTag();
+    /* this.addTag(); */
+    if (news.length === 0) this.printRecipes(this.recipes);
+    else this.filterRecipes(news);
     countRecipes(newRecipes);
   }
 }
