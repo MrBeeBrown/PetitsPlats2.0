@@ -7,7 +7,7 @@ export class Appareils extends Filter {
     super(name, recipes)
   }
 
-  hydrate(recipes) {
+  /* hydrate(recipes) {
     recipes.forEach(element => {
       //Hydrate appliance
       const capitalized = element.appliance.charAt(0).toUpperCase() + element.appliance.slice(1).toLowerCase();
@@ -32,7 +32,7 @@ export class Appareils extends Filter {
       this.container.appendChild(p);
     })
     this.filtre.appendChild(this.container);
-  }
+  } */
 
   filterRecipes(tagElement) {
     //Sort the recipes by selected tag

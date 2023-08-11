@@ -7,7 +7,7 @@ export class Ingredients extends Filter {
     super(name, recipes)
   }
 
-  hydrate(recipes) {
+  /* hydrate(recipes) {
     recipes.forEach(element => {
       //Hydrate ingredients
       for (let i = 0; i < element.ingredients.length; i++) {
@@ -32,7 +32,7 @@ export class Ingredients extends Filter {
       this.container.appendChild(p);
     })
     this.filtre.appendChild(this.container);
-  }
+  } */
 
   filterRecipes(tagElement) {
     //Sort the recipes by selected tag

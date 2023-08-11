@@ -1,4 +1,5 @@
 import { sortItems } from "./sortItems.js";
+import { addTag } from "../functions/addTag.js";
 
 export function hydrateAllFilter(recipes) {
   const ustensilsItems = [];
@@ -24,12 +25,6 @@ export function hydrateAllFilter(recipes) {
       const p = document.createElement("p");
       p.classList.add(`ustensils_items`);
       p.innerHTML = `${e}`;
-      const filterUstensilsElement = document.querySelectorAll(".filtre_element_text");
-      filterUstensilsElement.forEach(item => {
-        if (item.textContent == p.textContent) {
-          p.classList.add("crossed");
-        }
-      })
       ustensilsContainer.appendChild(p);
     })
     filtreUstensils.appendChild(ustensilsContainer);
@@ -46,12 +41,6 @@ export function hydrateAllFilter(recipes) {
       const p = document.createElement("p");
       p.classList.add(`ingredients_items`);
       p.innerHTML = `${e}`;
-      const filterIngredientsElement = document.querySelectorAll(".filtre_element_text");
-      filterIngredientsElement.forEach(item => {
-        if (item.textContent == p.textContent) {
-          p.classList.add("crossed");
-        }
-      })
       ingredientsContainer.appendChild(p);
     })
     filtreIngredients.appendChild(ingredientsContainer);
@@ -68,14 +57,10 @@ export function hydrateAllFilter(recipes) {
       const p = document.createElement("p");
       p.classList.add(`appareils_items`);
       p.innerHTML = `${e}`;
-      const filterAppareilsElement = document.querySelectorAll(".filtre_element_text");
-      filterAppareilsElement.forEach(item => {
-        if (item.textContent == p.textContent) {
-          p.classList.add("crossed");
-        }
-      })
       appareilsContainer.appendChild(p);
     })
     filtreAppareils.appendChild(appareilsContainer);
   });
+
+  addTag();
 }

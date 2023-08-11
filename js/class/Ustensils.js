@@ -7,7 +7,7 @@ export class Ustensils extends Filter {
     super(name, recipes)
   }
 
-  hydrate(recipes) {
+  /* hydrate(recipes) {
     recipes.forEach(element => {
       //Hydrate ustensils
       for (let i = 0; i < element.ustensils.length; i++) {
@@ -32,7 +32,7 @@ export class Ustensils extends Filter {
       this.container.appendChild(p);
     })
     this.filtre.appendChild(this.container);
-  }
+  } */
 
   filterRecipes(tagElement) {
     //Sort the recipes by selected tag
