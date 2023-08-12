@@ -1,3 +1,5 @@
+import { removeTag } from "./removeTag.js";
+
 export function addTag() {
   const result = document.querySelector(".filtre_resultat");
   const tagElement = [];
@@ -71,18 +73,7 @@ export function addTag() {
     })
   })
 
-  //EventListener to remove tag element
-  const filtre = document.querySelectorAll(".filtre_element");
-  if (filtre.length > 0) {
-    console.log(filtre);
-    filtre.forEach(item => {
-      const removeTag = item.lastElementChild;
-      removeTag.addEventListener("click", () => {
-        result.removeChild(item);
-        tagElement = tagElement.filter((e) => e !== item.firstElementChild.textContent);
-      })
-    })
-  }
+  removeTag();
 
   /* if (tagElement.length === 0) this.printRecipes(this.recipes);
   else this.filterRecipes(tagElement); */
