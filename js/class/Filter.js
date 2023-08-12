@@ -1,7 +1,6 @@
 import { Recette } from "./Recette.js";
 import { countRecipes } from "../functions/countRecipes.js";
 import { hydrateAllFilter } from "../functions/hydrateAllFilter.js";
-import { addTag } from "../functions/addTag.js";
 
 export class Filter {
   constructor(name, recipes) {
@@ -73,8 +72,8 @@ export class Filter {
     });
   }
 
-  /* addTag() {
-    //Add tag
+  addTag() {
+    /* //Add tag
     const searchData = document.querySelectorAll(`.${this.name}_items`);
     searchData.forEach(element => {
       element.addEventListener("click", () => {
@@ -103,8 +102,8 @@ export class Filter {
           }
         }
       })
-    })
-  } */
+    }) */
+  }
 
   printRecipes(newRecipes) {
     //Print the recipes by selected tag
@@ -115,9 +114,6 @@ export class Filter {
     })
     this.recipesItems = [];
     hydrateAllFilter(newRecipes);
-    /* this.addTag(); */
-    if (news.length === 0) this.printRecipes(this.recipes);
-    else this.filterRecipes(news);
     countRecipes(newRecipes);
   }
 }

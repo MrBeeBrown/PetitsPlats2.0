@@ -11,6 +11,7 @@ export function hydrateAllFilter(recipes) {
   const filtreUstensils = document.querySelector(`.filtre_ustensils`);
   const filtreIngredients = document.querySelector(`.filtre_ingredients`);
   const filtreAppareils = document.querySelector(`.filtre_appareils`);
+  const crossedElement = document.querySelectorAll(".filtre_element_text");
 
   recipes.forEach(element => {
     //Hydrate ustensils
@@ -26,6 +27,12 @@ export function hydrateAllFilter(recipes) {
       p.classList.add(`ustensils_items`);
       p.innerHTML = `${e}`;
       ustensilsContainer.appendChild(p);
+      //Cross item in tag element
+      if (crossedElement.length > 0) {
+        crossedElement.forEach(item => {
+          if (item.textContent == e) p.classList.add("crossed");
+        })
+      }
     })
     filtreUstensils.appendChild(ustensilsContainer);
 
@@ -42,6 +49,12 @@ export function hydrateAllFilter(recipes) {
       p.classList.add(`ingredients_items`);
       p.innerHTML = `${e}`;
       ingredientsContainer.appendChild(p);
+      //Cross item in tag element
+      if (crossedElement.length > 0) {
+        crossedElement.forEach(item => {
+          if (item.textContent == e) p.classList.add("crossed");
+        })
+      }
     })
     filtreIngredients.appendChild(ingredientsContainer);
 
@@ -58,6 +71,12 @@ export function hydrateAllFilter(recipes) {
       p.classList.add(`appareils_items`);
       p.innerHTML = `${e}`;
       appareilsContainer.appendChild(p);
+      //Cross item in tag element
+      if (crossedElement.length > 0) {
+        crossedElement.forEach(item => {
+          if (item.textContent == e) p.classList.add("crossed");
+        })
+      }
     })
     filtreAppareils.appendChild(appareilsContainer);
   });
