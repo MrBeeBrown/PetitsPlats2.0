@@ -1,6 +1,7 @@
 import { Recette } from "./Recette.js";
 import { countRecipes } from "../functions/countRecipes.js";
 import { hydrateAllFilter } from "../functions/hydrateAllFilter.js";
+import { addTag } from "../functions/addTag.js";
 
 export class Filter {
   constructor(name, recipes) {
@@ -12,7 +13,6 @@ export class Filter {
     this.chevronDown = document.querySelector(`.chevron_down_${this.name}`)
     this.filtre = document.querySelector(`.filtre_${this.name}`)
     this.container = document.querySelector(`.container_${this.name}`)
-    this.recipesItems = []
     this.searchInput = document.querySelector(`#${this.name}_search`)
     this.result = document.querySelector(".filtre_resultat")
     this.tagElement = []
@@ -72,8 +72,8 @@ export class Filter {
     });
   }
 
-  addTag() {
-    /* //Add tag
+  tagItem() {
+    //Add tag
     const searchData = document.querySelectorAll(`.${this.name}_items`);
     searchData.forEach(element => {
       element.addEventListener("click", () => {
@@ -87,6 +87,7 @@ export class Filter {
           this.result.innerHTML += content;
           this.tagElement.push(element.innerText);
           this.filterRecipes(this.tagElement);
+
           //EventListener to remove tag element
           const tag = document.querySelectorAll('.filtre_element');
           if (tag.length > 0) {
@@ -102,7 +103,7 @@ export class Filter {
           }
         }
       })
-    }) */
+    })
   }
 
   printRecipes(newRecipes) {
@@ -112,8 +113,8 @@ export class Filter {
       const ficheRecette = new Recette(item);
       ficheRecette.print();
     })
-    this.recipesItems = [];
     hydrateAllFilter(newRecipes);
+    this.tagItem();
     countRecipes(newRecipes);
   }
 }

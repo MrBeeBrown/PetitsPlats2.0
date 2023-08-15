@@ -1,6 +1,5 @@
 export function addTag() {
   const result = document.querySelector(".filtre_resultat");
-  const tagElement = [];
 
   //Add tag ustensils
   const searchDataUstensils = document.querySelectorAll(`.ustensils_items`);
@@ -14,12 +13,6 @@ export function addTag() {
   `
       if (!result.textContent.includes(element.innerText)) {
         result.innerHTML += content;
-        tagElement.push(element.innerText);
-        const filterUstensils = document.querySelectorAll(".filtre_element_text");
-        filterUstensils.forEach(item => {
-          if (item.textContent == element.innerText) element.classList.add("crossed");
-          else element.classList.remove("crossed");
-        })
       }
     })
   })
@@ -36,12 +29,6 @@ export function addTag() {
   `
       if (!result.textContent.includes(element.innerText)) {
         result.innerHTML += content;
-        tagElement.push(element.innerText);
-        const filterIngredients = document.querySelectorAll(".filtre_element_text");
-        filterIngredients.forEach(item => {
-          if (item.textContent == element.innerText) element.classList.add("crossed");
-          else element.classList.remove("crossed");
-        })
       }
     })
   })
@@ -58,30 +45,7 @@ export function addTag() {
   `
       if (!result.textContent.includes(element.innerText)) {
         result.innerHTML += content;
-        tagElement.push(element.innerText);
-        const filterAppareils = document.querySelectorAll(".filtre_element_text");
-        filterAppareils.forEach(item => {
-          if (item.textContent == element.innerText) element.classList.add("crossed");
-          else element.classList.remove("crossed");
-        })
       }
     })
   })
-
-
-  /* if (tag.length > 0) {
-    tag.forEach(item => {
-      const removeTag = item.lastElementChild;
-      removeTag.addEventListener("click", () => {
-        this.result.removeChild(item);
-        this.tagElement = this.tagElement.filter((e) => e !== item.firstElementChild.textContent);
-        if (this.tagElement.length === 0) this.printRecipes(this.recipes);
-        else this.filterRecipes(this.tagElement);
-      })
-    })
-  } */
-
-  /* if (tagElement.length === 0) this.printRecipes(this.recipes);
-  else this.filterRecipes(tagElement); */
-  /* return tagElement; */
 }

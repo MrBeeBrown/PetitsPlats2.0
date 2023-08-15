@@ -4,40 +4,39 @@ import { Ingredients } from "./class/Ingredients.js";
 import { Appareils } from "./class/Appareils.js";
 import { countRecipes } from "./functions/countRecipes.js";
 import { hydrateAllFilter } from "./functions/hydrateAllFilter.js";
-import { removeTag } from "../functions/removeTag.js";
 
-//Affichage des recettes
+//Print the recipes
 recipes.forEach(element => {
   const ficheRecette = new Recette(element);
   ficheRecette.print();
 });
 
-//Affichage du nombre de recettes
+//Count and print number of recipes
 countRecipes(recipes);
 
-//Création du filtre ustensiles
+//Create the ustensils filter
 const ustensiles = new Ustensils("ustensils", recipes);
-/* ustensiles.hydrate(recipes); */
 ustensiles.start();
-ustensiles.addTag();
 
-//Création du filtre ingrédients
+//Create the ingredients filter
 const ingredients = new Ingredients("ingredients", recipes);
-/* ingredients.hydrate(recipes); */
 ingredients.start();
-ingredients.addTag();
 
-//Création du filtre appareils
-const appareils = new Appareils("appareils", recipes);
-/* appareils.hydrate(recipes); */
-appareils.start();
-appareils.addTag();
+//Create the appliance filter
+/* const appareils = new Appareils("appareils", recipes);
+appareils.start(); */
 
+//Hydrate all filter
 hydrateAllFilter(recipes);
+
+//Active research in filter
 ustensiles.filter();
 ingredients.filter();
-appareils.filter();
+/* appareils.filter(); */
 
-removeTag();
+//Active the AddTag elements
+ustensiles.tagItem();
+ingredients.tagItem();
+/* appareils.tagItem(); */
 
 /* console.log(recipes); */
