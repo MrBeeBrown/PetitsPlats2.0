@@ -1,7 +1,7 @@
 import { Recette } from "./Recette.js";
 import { countRecipes } from "../functions/countRecipes.js";
 import { hydrateAllFilter } from "../functions/hydrateAllFilter.js";
-import { addTag } from "../functions/addTag.js";
+/* import { addTag } from "../functions/addTag.js"; */
 
 export class Filter {
   constructor(name, recipes) {
@@ -87,23 +87,23 @@ export class Filter {
           this.result.innerHTML += content;
           this.tagElement.push(element.innerText);
           this.filterRecipes(this.tagElement);
-
-          //EventListener to remove tag element
-          const tag = document.querySelectorAll('.filtre_element');
-          if (tag.length > 0) {
-            tag.forEach(item => {
-              const removeTag = item.lastElementChild;
-              removeTag.addEventListener("click", () => {
-                this.result.removeChild(item);
-                this.tagElement = this.tagElement.filter((e) => e !== item.firstElementChild.textContent);
-                if (this.tagElement.length === 0) this.printRecipes(this.recipes);
-                else this.filterRecipes(this.tagElement);
-              })
-            })
-          }
         }
       })
     })
+
+    //EventListener to remove tag element
+    const tag = document.querySelectorAll('.filtre_element');
+    if (tag.length > 0) {
+      tag.forEach(item => {
+        const removeTag = item.lastElementChild;
+        removeTag.addEventListener("click", () => {
+          this.result.removeChild(item);
+          this.tagElement = this.tagElement.filter((e) => e !== item.firstElementChild.textContent);
+          if (this.tagElement.length === 0) this.printRecipes(this.recipes);
+          else this.filterRecipes(this.tagElement);
+        })
+      })
+    }
   }
 
   printRecipes(newRecipes) {
