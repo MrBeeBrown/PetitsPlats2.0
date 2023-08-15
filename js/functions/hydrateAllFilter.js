@@ -1,5 +1,4 @@
 import { sortItems } from "./sortItems.js";
-import { addTag } from "../functions/addTag.js";
 
 export function hydrateAllFilter(recipes) {
   const ustensilsItems = [];
@@ -11,15 +10,15 @@ export function hydrateAllFilter(recipes) {
   const filtreUstensils = document.querySelector(`.filtre_ustensils`);
   const filtreIngredients = document.querySelector(`.filtre_ingredients`);
   const filtreAppareils = document.querySelector(`.filtre_appareils`);
-  const crossedElement = document.querySelectorAll(".filtre_element_text");
+  const crossedElement = document.querySelectorAll(".filtre_resultat");
 
   recipes.forEach(element => {
-    //Hydrate ustensils
+    //Get all ustensils
     for (let i = 0; i < element.ustensils.length; i++) {
       const capitalizedUstensils = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1).toLowerCase();
       if (!ustensilsItems.includes(capitalizedUstensils)) ustensilsItems.push(capitalizedUstensils);
     }
-    //Update the list of ustensils
+    //Hydrate the list of ustensils
     const sortedUstensils = sortItems(ustensilsItems);
     ustensilsContainer.innerHTML = ``;
     sortedUstensils.forEach(e => {
@@ -36,12 +35,12 @@ export function hydrateAllFilter(recipes) {
     })
     filtreUstensils.appendChild(ustensilsContainer);
 
-    //Hydrate ingredients
+    //Get all ingredients
     for (let i = 0; i < element.ingredients.length; i++) {
       const capitalizedIngredients = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
       if (!ingredientsItems.includes(capitalizedIngredients)) ingredientsItems.push(capitalizedIngredients);
     };
-    //Update the list of ingredients
+    //Hydrate the list of ingredients
     const sortedIngredients = sortItems(ingredientsItems);
     ingredientsContainer.innerHTML = ``;
     sortedIngredients.forEach(e => {
@@ -58,12 +57,12 @@ export function hydrateAllFilter(recipes) {
     })
     filtreIngredients.appendChild(ingredientsContainer);
 
-    //Hydrate appliance
+    //Get all appliance
     const capitalizedAppareils = element.appliance.charAt(0).toUpperCase() + element.appliance.slice(1).toLowerCase();
     if (!appareilsItems.includes(capitalizedAppareils)) {
       appareilsItems.push(capitalizedAppareils);
     }
-    //Update the list of appliance
+    //Hydrate the list of appliance
     const sortedAppareils = sortItems(appareilsItems);
     appareilsContainer.innerHTML = ``;
     sortedAppareils.forEach(e => {
@@ -80,6 +79,4 @@ export function hydrateAllFilter(recipes) {
     })
     filtreAppareils.appendChild(appareilsContainer);
   });
-
-  addTag();
 }
