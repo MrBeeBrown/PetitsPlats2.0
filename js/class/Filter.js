@@ -61,9 +61,7 @@ export class Filter {
     searchData.forEach(e => {
       if (!e.innerText.toLowerCase().includes(this.searchInput.value)) {
         e.style.display = "none";
-        if (this.container.innerText === '') {
-          this.showFilter();
-        }
+        if (this.container.innerText === '') this.showFilter();
       } else {
         e.style.display = "block";
         this.hideFilter();
@@ -78,23 +76,13 @@ export class Filter {
       const p = document.createElement("p");
       p.classList.add(`${this.name}_items`);
       p.innerHTML = `${e}`;
-      this.container.appendChild(p);
-
-
-      /* const tag = document.querySelectorAll(`.${this.name}_items`);
-      const tagElement = document.querySelectorAll(`.filtre_element_${this.name}`);
-      if (tagElement.length > 0) {
-        tag.forEach(element => {
-          tagElement.forEach(item => {
-            if (item.textContent === element.textContent) {
-              e.classList.add("crossed");
-            }
-          })
-          console.log(element);
+      const currentTag = document.querySelectorAll(`.filtre_element_${this.name}`);
+      if (currentTag.length > 0) {
+        currentTag.forEach(element => {
+          if (element.firstElementChild.textContent == e) p.classList.add("crossed");
         })
-      } */
-
-
+      }
+      this.container.appendChild(p);
     })
     this.filtre.appendChild(this.container);
     this.displayTag();
@@ -114,28 +102,25 @@ export class Filter {
         if (!this.result.textContent.includes(element.innerText)) {
           this.result.innerHTML += content;
           this.filterRecipes();
-          this.removeTag();
+          //EventListener to remove tag element
+          const tag = document.querySelectorAll(`.filtre_element_${this.name}`);
+          if (tag.length > 0) {
+            tag.forEach(item => {
+              const removeTag = item.lastElementChild;
+              removeTag.addEventListener("click", () => {
+                this.result.removeChild(item);
+                if (this.result.childElementCount === 0) this.printRecipes(this.recipes);
+                else this.filterRecipes();
+              })
+            })
+          }
         }
       })
     })
   }
 
-  removeTag() {
-    //EventListener to remove tag element
-    const tag = document.querySelectorAll(`.filtre_element_${this.name}`);
-    if (tag.length > 0) {
-      tag.forEach(item => {
-        const removeTag = item.lastElementChild;
-        removeTag.addEventListener("click", () => {
-          this.result.removeChild(item);
-          if (this.tagElement.length === 0) this.printRecipes(this.recipes);
-          else this.filterRecipes();
-        })
-      })
-    }
-  }
-
   filterRecipes() {
+    this.listRecipes = [];
     this.recipes.forEach(recipe => {
       //Sort recipes by ustensils
       this.ustensilsTags = document.querySelectorAll(".filtre_element_ustensils");
@@ -145,7 +130,6 @@ export class Filter {
           if (this.listUstensils.includes(e.firstElementChild.innerText.toLowerCase())) this.listRecipes.push(recipe);
         })
       }
-
       //Sort recipes by ingredients
       this.ingredientsTags = document.querySelectorAll(".filtre_element_ingredients");
       if (this.ingredientsTags.length > 0) {
@@ -157,7 +141,6 @@ export class Filter {
           if (this.listIngredients.includes(e.firstElementChild.innerText.toLowerCase())) this.listRecipes.push(recipe);
         })
       }
-
       //Sort recipes by appareils
       this.appareilsTags = document.querySelectorAll(".filtre_element_appareils");
       if (this.appareilsTags.length > 0) {

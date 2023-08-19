@@ -17,18 +17,15 @@ countRecipes(recipes);
 const ustensiles = new Ustensils(recipes);
 ustensiles.start();
 ustensiles.hydrate(recipes);
-/* ustensiles.displayTag(); */
 
 /* //Create the ingredients filter
 const ingredients = new Ingredients(recipes);
 ingredients.start();
 ingredients.hydrate(recipes);
-ingredients.displayTag();
 
 //Create the appliance filter
 const appareils = new Appareils(recipes);
 appareils.start();
-appareils.hydrate(recipes);
-appareils.displayTag(); */
+appareils.hydrate(recipes); */
 
 /* console.log(recipes); */

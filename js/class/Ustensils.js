@@ -8,6 +8,7 @@ export class Ustensils extends Filter {
   }
 
   hydrate(recipes) {
+    this.recipesItems = [];
     recipes.forEach(element => {
       //Select all ustensils
       for (let i = 0; i < element.ustensils.length; i++) {
