@@ -106,7 +106,27 @@ main {
   margin-bottom: 1rem;
 }
 
-.filtre_element {
+.filtre_element_ustensils {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0 .5rem;
+  padding: .5rem .5rem .5rem .5rem;
+  background-color: var(--yellow-color);
+  border-radius: .5rem;
+}
+
+.filtre_element_ingredients {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0 .5rem;
+  padding: .5rem .5rem .5rem .5rem;
+  background-color: var(--yellow-color);
+  border-radius: .5rem;
+}
+
+.filtre_element_appareils {
   display: flex;
   justify-content: space-between;
   align-items: center;

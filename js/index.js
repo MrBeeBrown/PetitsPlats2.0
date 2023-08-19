@@ -3,7 +3,6 @@ import { Ustensils } from "./class/Ustensils.js";
 import { Ingredients } from "./class/Ingredients.js";
 import { Appareils } from "./class/Appareils.js";
 import { countRecipes } from "./functions/countRecipes.js";
-import { hydrateAllFilter } from "./functions/hydrateAllFilter.js";
 
 //Print the recipes
 recipes.forEach(element => {
@@ -15,28 +14,21 @@ recipes.forEach(element => {
 countRecipes(recipes);
 
 //Create the ustensils filter
-const ustensiles = new Ustensils("ustensils", recipes);
+const ustensiles = new Ustensils(recipes);
 ustensiles.start();
+ustensiles.hydrate(recipes);
+/* ustensiles.displayTag(); */
 
-//Create the ingredients filter
-const ingredients = new Ingredients("ingredients", recipes);
+/* //Create the ingredients filter
+const ingredients = new Ingredients(recipes);
 ingredients.start();
+ingredients.hydrate(recipes);
+ingredients.displayTag();
 
 //Create the appliance filter
-/* const appareils = new Appareils("appareils", recipes);
-appareils.start(); */
-
-//Hydrate all filter
-hydrateAllFilter(recipes);
-
-//Active research in filter
-ustensiles.filter();
-ingredients.filter();
-/* appareils.filter(); */
-
-//Active the AddTag elements
-ustensiles.tagItem();
-ingredients.tagItem();
-/* appareils.tagItem(); */
+const appareils = new Appareils(recipes);
+appareils.start();
+appareils.hydrate(recipes);
+appareils.displayTag(); */
 
 /* console.log(recipes); */

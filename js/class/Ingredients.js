@@ -1,27 +1,23 @@
 import { Filter } from "./Filter.js";
+import { sortItems } from "../functions/sortItems.js";
 import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Ingredients extends Filter {
-  constructor(name, recipes) {
-    super(name, recipes)
+  constructor(recipes) {
+    super("ingredients", recipes);
   }
 
-  filterRecipes(tagElement) {
-    //Sort the recipes by selected tag
-    this.newRecipesList = [];
-    this.recipes.forEach(recipes => {
-      this.newList = [];
-      this.flag = 0;
-      const newTagElement = transformToLowerCase(tagElement);
-      for (let i = 0; i < recipes.ingredients.length; i++) {
-        this.newList.push(recipes.ingredients[i].ingredient);
+  hydrate(recipes) {
+    recipes.forEach(element => {
+      //Select all ingredients
+      for (let i = 0; i < element.ingredients.length; i++) {
+        const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
+        if (!this.recipesItems.includes(capitalized)) this.recipesItems.push(capitalized);
       }
-      this.newList = transformToLowerCase(this.newList);
-      newTagElement.forEach(e => {
-        if (this.newList.includes(e)) this.flag++;
-      })
-      if (this.flag === newTagElement.length) this.newRecipesList.push(recipes);
-    })
-    this.printRecipes(this.newRecipesList);
+    });
+
+    //Sort and hydrate the list of ingredients
+    const sortedElements = sortItems(this.recipesItems);
+    this.displayFilter(sortedElements);
   }
 }
