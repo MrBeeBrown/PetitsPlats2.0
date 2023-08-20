@@ -1,6 +1,5 @@
-import { Recette } from "./Recette.js";
-import { countRecipes } from "../functions/countRecipes.js";
 import { transformToLowerCase } from "../functions/transformToLowerCase.js";
+import { printRecipes } from "../index.js";
 
 export class Filter {
   constructor(name, recipes) {
@@ -12,14 +11,13 @@ export class Filter {
     this.chevronDown = document.querySelector(`.chevron_down_${this.name}`);
     this.container = document.querySelector(`.container_${this.name}`);
     this.searchInput = document.querySelector(`#${this.name}_search`);
-    this.tagElement = [];
-    this.recipesItems = [];
-    this.espaceRecipes = document.querySelector('.liste_recettes');
     this.result = document.querySelector(`.filtre_resultat`);
+    this.listElements = [];
     this.listUstensils = [];
     this.listIngredients = [];
     this.listAppareils = [];
     this.listRecipes = [];
+    this.flag = 0;
   }
 
   start() {
@@ -78,6 +76,7 @@ export class Filter {
       p.innerHTML = `${e}`;
       const currentTag = document.querySelectorAll(`.filtre_element_${this.name}`);
       if (currentTag.length > 0) {
+        //Cross item present in tag element
         currentTag.forEach(element => {
           if (element.firstElementChild.textContent == e) p.classList.add("crossed");
         })
@@ -89,7 +88,7 @@ export class Filter {
   }
 
   displayTag() {
-    //Add tag element
+    //Add eventListener to add tag element
     const searchData = document.querySelectorAll(`.${this.name}_items`);
     searchData.forEach(element => {
       element.addEventListener("click", () => {
@@ -101,67 +100,93 @@ export class Filter {
       `
         if (!this.result.textContent.includes(element.innerText)) {
           this.result.innerHTML += content;
+          this.deleteTag();
           this.filterRecipes();
-          //EventListener to remove tag element
-          const tag = document.querySelectorAll(`.filtre_element_${this.name}`);
-          if (tag.length > 0) {
-            tag.forEach(item => {
-              const removeTag = item.lastElementChild;
-              removeTag.addEventListener("click", () => {
-                this.result.removeChild(item);
-                if (this.result.childElementCount === 0) this.printRecipes(this.recipes);
-                else this.filterRecipes();
-              })
-            })
-          }
         }
       })
     })
   }
 
+  deleteTag() {
+    //EventListener to remove tag element
+    const tag = document.querySelectorAll(`.filtre_element_${this.name}`);
+    if (tag.length > 0) {
+      tag.forEach(item => {
+        const removeTag = item.lastElementChild;
+        removeTag.addEventListener("click", () => {
+          this.result.removeChild(item);
+          if (this.result.childElementCount === 0) printRecipes(this.recipes);
+          else this.filterRecipes();
+        })
+      })
+    }
+  }
+
   filterRecipes() {
     this.listRecipes = [];
+
+
     this.recipes.forEach(recipe => {
       //Sort recipes by ustensils
       this.ustensilsTags = document.querySelectorAll(".filtre_element_ustensils");
       if (this.ustensilsTags.length > 0) {
+        this.flag = 0;
         this.listUstensils = transformToLowerCase(recipe.ustensils);
         this.ustensilsTags.forEach(e => {
-          if (this.listUstensils.includes(e.firstElementChild.innerText.toLowerCase())) this.listRecipes.push(recipe);
+          if (this.listUstensils.includes(e.firstElementChild.innerText.toLowerCase())) {
+            this.flag++;
+          }
         })
+        if (this.flag === this.ustensilsTags.length) this.listRecipes.push(recipe);
       }
+    })
+    if (this.listRecipes.length === 0) this.listRecipes = this.recipes;
+
+
+
+    this.listRecipes.forEach(recipe => {
       //Sort recipes by ingredients
       this.ingredientsTags = document.querySelectorAll(".filtre_element_ingredients");
       if (this.ingredientsTags.length > 0) {
-        for (let i = 0; i < this.recipes.ingredients.length; i++) {
-          this.listIngredients.push(recipes.ingredients[i].ingredient);
+        this.flag = 0;
+        for (let i = 0; i < recipe.ingredients.length; i++) {
+          this.listIngredients.push(recipe.ingredients[i].ingredient);
         }
         this.listIngredients = transformToLowerCase(this.listIngredients);
         this.ingredientsTags.forEach(e => {
-          if (this.listIngredients.includes(e.firstElementChild.innerText.toLowerCase())) this.listRecipes.push(recipe);
+          if (this.listIngredients.includes(e.firstElementChild.innerText.toLowerCase())) {
+            this.flag++;
+          }
         })
+        if (!this.flag === this.ingredientsTags.length) {
+          const elementIndex = this.listRecipes.findIndex(recipe);
+          this.listRecipes.splice(elementIndex);
+        }
       }
+    })
+    if (this.listRecipes.length === 0) this.listRecipes = this.recipes;
+
+
+
+    this.listRecipes.forEach(recipe => {
       //Sort recipes by appareils
       this.appareilsTags = document.querySelectorAll(".filtre_element_appareils");
       if (this.appareilsTags.length > 0) {
-        this.listAppareils = transformToLowerCase(recipe.appliance);
+        this.flag = 0;
+        this.listAppareils = recipe.appliance.toLowerCase();
         this.appareilsTags.forEach(e => {
-          if (this.listAppareils.includes(e.firstElementChild.innerText.toLowerCase())) this.listRecipes.push(recipe);
+          if (this.listAppareils.includes(e.firstElementChild.innerText.toLowerCase())) {
+            this.flag++;
+          }
         })
+        if (!this.flag === this.appareilsTags.length) {
+          const elementIndex = this.listRecipes.findIndex(recipe);
+          this.listRecipes.splice(elementIndex);
+        }
       }
     })
 
-    this.printRecipes(this.listRecipes);
-  }
 
-  printRecipes(newRecipes) {
-    //Print the recipes by selected tag
-    this.espaceRecipes.innerHTML = ``;
-    newRecipes.forEach(item => {
-      const ficheRecette = new Recette(item);
-      ficheRecette.print();
-    })
-    this.hydrate(newRecipes);
-    countRecipes(newRecipes);
+    printRecipes(this.listRecipes);
   }
 }

@@ -1,6 +1,5 @@
 import { Filter } from "./Filter.js";
 import { sortItems } from "../functions/sortItems.js";
-import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Ingredients extends Filter {
   constructor(recipes) {
@@ -8,16 +7,17 @@ export class Ingredients extends Filter {
   }
 
   hydrate(recipes) {
+    this.listElements = [];
     recipes.forEach(element => {
-      //Select all ingredients
+      //Select all ingredients from recipes
       for (let i = 0; i < element.ingredients.length; i++) {
         const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
-        if (!this.recipesItems.includes(capitalized)) this.recipesItems.push(capitalized);
+        if (!this.listElements.includes(capitalized)) this.listElements.push(capitalized);
       }
     });
 
     //Sort and hydrate the list of ingredients
-    const sortedElements = sortItems(this.recipesItems);
+    const sortedElements = sortItems(this.listElements);
     this.displayFilter(sortedElements);
   }
 }
