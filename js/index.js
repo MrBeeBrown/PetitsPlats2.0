@@ -18,10 +18,10 @@ const ustensiles = new Ustensils(recipes);
 ustensiles.start();
 ustensiles.hydrate(recipes);
 
-//Create the ingredients filter
+/* //Create the ingredients filter
 const ingredients = new Ingredients(recipes);
 ingredients.start();
-ingredients.hydrate(recipes);
+ingredients.hydrate(recipes); */
 
 /* //Create the appliance filter
 const appareils = new Appareils(recipes);
@@ -37,7 +37,7 @@ export function printRecipes(newRecipes) {
     ficheRecette.print();
   })
   ustensiles.hydrate(newRecipes);
-  ingredients.hydrate(newRecipes);
+  /* ingredients.hydrate(newRecipes); */
   /* appareils.hydrate(newRecipes); */
   countRecipes(newRecipes);
 }

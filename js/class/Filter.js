@@ -126,9 +126,9 @@ export class Filter {
     this.listRecipes = [];
 
 
+    //Filter recipes by ustensils tags
+    this.ustensilsTags = document.querySelectorAll(".filtre_element_ustensils");
     this.recipes.forEach(recipe => {
-      //Sort recipes by ustensils
-      this.ustensilsTags = document.querySelectorAll(".filtre_element_ustensils");
       if (this.ustensilsTags.length > 0) {
         this.flag = 0;
         this.listUstensils = transformToLowerCase(recipe.ustensils);
@@ -143,10 +143,9 @@ export class Filter {
     if (this.listRecipes.length === 0) this.listRecipes = this.recipes;
 
 
-
+    //Filter recipes by ingredients tags
+    this.ingredientsTags = document.querySelectorAll(".filtre_element_ingredients");
     this.listRecipes.forEach(recipe => {
-      //Sort recipes by ingredients
-      this.ingredientsTags = document.querySelectorAll(".filtre_element_ingredients");
       if (this.ingredientsTags.length > 0) {
         this.flag = 0;
         for (let i = 0; i < recipe.ingredients.length; i++) {
@@ -159,18 +158,18 @@ export class Filter {
           }
         })
         if (!this.flag === this.ingredientsTags.length) {
-          const elementIndex = this.listRecipes.findIndex(recipe);
-          this.listRecipes.splice(elementIndex);
+          const findIndex = this.listRecipes.indexOf(recipe);
+          /* console.log(findIndex); */
+          this.listRecipes.splice(findIndex);
         }
       }
     })
     if (this.listRecipes.length === 0) this.listRecipes = this.recipes;
 
 
-
+    //Filter recipes by appareils tags
+    this.appareilsTags = document.querySelectorAll(".filtre_element_appareils");
     this.listRecipes.forEach(recipe => {
-      //Sort recipes by appareils
-      this.appareilsTags = document.querySelectorAll(".filtre_element_appareils");
       if (this.appareilsTags.length > 0) {
         this.flag = 0;
         this.listAppareils = recipe.appliance.toLowerCase();
@@ -179,9 +178,9 @@ export class Filter {
             this.flag++;
           }
         })
-        if (!this.flag === this.appareilsTags.length) {
-          const elementIndex = this.listRecipes.findIndex(recipe);
-          this.listRecipes.splice(elementIndex);
+        if (!this.flag === this.ingredientsTags.length) {
+          const findIndex = this.listRecipes.indexOf(recipe);
+          this.listRecipes.splice(findIndex);
         }
       }
     })
@@ -189,4 +188,4 @@ export class Filter {
 
     printRecipes(this.listRecipes);
   }
-}
+};
