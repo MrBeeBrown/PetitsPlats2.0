@@ -20,4 +20,24 @@ export class Appareils extends Filter {
     const sortedElements = sortItems(this.listElements);
     this.displayFilter(sortedElements);
   }
+
+  filteredItems(recipes) {
+    //Filter recipes by appareils tags
+    this.appareilsTags = document.querySelectorAll(".filtre_element_appareils");
+    recipes.forEach(recipe => {
+      if (this.appareilsTags.length > 0) {
+        this.flag = 0;
+        this.listAppareils = recipe.appliance.toLowerCase();
+        this.appareilsTags.forEach(e => {
+          if (this.listAppareils.includes(e.firstElementChild.innerText.toLowerCase())) {
+            this.flag++;
+          }
+        })
+        if (!this.flag === this.ingredientsTags.length) {
+          const findIndex = this.listRecipes.indexOf(recipe);
+          this.listRecipes.splice(findIndex);
+        }
+      }
+    })
+  }
 }

@@ -3,30 +3,24 @@ import { Ustensils } from "./class/Ustensils.js";
 import { Ingredients } from "./class/Ingredients.js";
 import { Appareils } from "./class/Appareils.js";
 import { countRecipes } from "./functions/countRecipes.js";
+import { Liste } from "./class/Liste.js";
 
-//Print the recipes
-recipes.forEach(element => {
-  const ficheRecette = new Recette(element);
-  ficheRecette.print();
-});
 
-//Count and print number of recipes
-countRecipes(recipes);
+const list = new Liste(recipes);
+list.displayRecipes(recipes);
+list.countRecipes(recipes);
 
 //Create the ustensils filter
 const ustensiles = new Ustensils(recipes);
-ustensiles.start();
-ustensiles.hydrate(recipes);
+list.filter(ustensiles, recipes);
 
 /* //Create the ingredients filter
-const ingredients = new Ingredients(recipes);
-ingredients.start();
-ingredients.hydrate(recipes); */
+const ingredients = new ingredients(recipes);
+list.filter(ingredients, recipes); */
 
 /* //Create the appliance filter
-const appareils = new Appareils(recipes);
-appareils.start();
-appareils.hydrate(recipes); */
+const appareils = new appareils(recipes);
+list.filter(appareils, recipes); */
 
 export function printRecipes(newRecipes) {
   //Print the recipes by selected tag
@@ -41,5 +35,3 @@ export function printRecipes(newRecipes) {
   /* appareils.hydrate(newRecipes); */
   countRecipes(newRecipes);
 }
-
-/* console.log(recipes); */

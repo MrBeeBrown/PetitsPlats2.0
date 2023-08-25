@@ -1,5 +1,6 @@
 import { Filter } from "./Filter.js";
 import { sortItems } from "../functions/sortItems.js";
+import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Ustensils extends Filter {
   constructor(recipes) {
@@ -19,5 +20,23 @@ export class Ustensils extends Filter {
     //Sort and hydrate the list of ustensils
     const sortedElements = sortItems(this.listElements);
     this.displayFilter(sortedElements);
+  }
+
+  filteredItems(recipes) {
+    //Filter recipes by ustensils tags
+    const ustensilsTags = document.querySelectorAll(".filtre_element_ustensils");
+    recipes.forEach(recipe => {
+      if (ustensilsTags.length > 0) {
+        this.flag = 0;
+        this.listUstensils = transformToLowerCase(recipe.ustensils);
+        ustensilsTags.forEach(e => {
+          if (this.listUstensils.includes(e.firstElementChild.innerText.toLowerCase())) {
+            this.flag++;
+          }
+        })
+        if (this.flag === ustensilsTags.length) this.listRecipes.push(recipe);
+      }
+    })
+    if (this.listRecipes.length === 0) this.listRecipes = this.recipes;
   }
 }
