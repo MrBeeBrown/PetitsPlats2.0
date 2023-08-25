@@ -1,5 +1,6 @@
 import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 import { printRecipes } from "../index.js";
+import { Liste } from "./Liste.js";
 
 export class Filter {
   constructor(name, recipes) {
@@ -124,66 +125,7 @@ export class Filter {
 
   filterRecipes() {
     this.listRecipes = [];
-
-
-    //Filter recipes by ustensils tags
-    this.ustensilsTags = document.querySelectorAll(".filtre_element_ustensils");
-    this.recipes.forEach(recipe => {
-      if (this.ustensilsTags.length > 0) {
-        this.flag = 0;
-        this.listUstensils = transformToLowerCase(recipe.ustensils);
-        this.ustensilsTags.forEach(e => {
-          if (this.listUstensils.includes(e.firstElementChild.innerText.toLowerCase())) {
-            this.flag++;
-          }
-        })
-        if (this.flag === this.ustensilsTags.length) this.listRecipes.push(recipe);
-      }
-    })
-    if (this.listRecipes.length === 0) this.listRecipes = this.recipes;
-
-
-    //Filter recipes by ingredients tags
-    this.ingredientsTags = document.querySelectorAll(".filtre_element_ingredients");
-    this.listRecipes.forEach(recipe => {
-      if (this.ingredientsTags.length > 0) {
-        this.flag = 0;
-        for (let i = 0; i < recipe.ingredients.length; i++) {
-          this.listIngredients.push(recipe.ingredients[i].ingredient);
-        }
-        this.listIngredients = transformToLowerCase(this.listIngredients);
-        this.ingredientsTags.forEach(e => {
-          if (this.listIngredients.includes(e.firstElementChild.innerText.toLowerCase())) {
-            this.flag++;
-          }
-        })
-        if (!this.flag === this.ingredientsTags.length) {
-          const findIndex = this.listRecipes.indexOf(recipe);
-          /* console.log(findIndex); */
-          this.listRecipes.splice(findIndex);
-        }
-      }
-    })
-    if (this.listRecipes.length === 0) this.listRecipes = this.recipes;
-
-
-    //Filter recipes by appareils tags
-    this.appareilsTags = document.querySelectorAll(".filtre_element_appareils");
-    this.listRecipes.forEach(recipe => {
-      if (this.appareilsTags.length > 0) {
-        this.flag = 0;
-        this.listAppareils = recipe.appliance.toLowerCase();
-        this.appareilsTags.forEach(e => {
-          if (this.listAppareils.includes(e.firstElementChild.innerText.toLowerCase())) {
-            this.flag++;
-          }
-        })
-        if (!this.flag === this.ingredientsTags.length) {
-          const findIndex = this.listRecipes.indexOf(recipe);
-          this.listRecipes.splice(findIndex);
-        }
-      }
-    })
+    this.filteredItems(this.recipes)
 
 
     printRecipes(this.listRecipes);
