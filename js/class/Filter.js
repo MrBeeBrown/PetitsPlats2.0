@@ -1,9 +1,8 @@
-import { transformToLowerCase } from "../functions/transformToLowerCase.js";
-import { printRecipes } from "../index.js";
-import { Liste } from "./Liste.js";
+import { sortItems } from "../functions/sortItems.js";
 
 export class Filter {
-  constructor(name, recipes) {
+  constructor(name, recipes, list) {
+    this.list = list;
     this.recipes = recipes;
     this.name = name;
     this.button = document.querySelector(`.btn_${this.name}`);
@@ -14,10 +13,6 @@ export class Filter {
     this.searchInput = document.querySelector(`#${this.name}_search`);
     this.result = document.querySelector(`.filtre_resultat`);
     this.listElements = [];
-    this.listUstensils = [];
-    this.listIngredients = [];
-    this.listAppareils = [];
-    this.listRecipes = [];
     this.flag = 0;
   }
 
@@ -68,10 +63,11 @@ export class Filter {
     })
   }
 
-  displayFilter(items) {
+  displayFilter() {
     //Display the list of items
+    const sortedElements = sortItems(this.listElements);
     this.container.innerHTML = ``;
-    items.forEach(e => {
+    sortedElements.forEach(e => {
       const p = document.createElement("p");
       p.classList.add(`${this.name}_items`);
       p.innerHTML = `${e}`;
@@ -102,7 +98,7 @@ export class Filter {
         if (!this.result.textContent.includes(element.innerText)) {
           this.result.innerHTML += content;
           this.deleteTag();
-          this.filterRecipes();
+          this.list.filter();
         }
       })
     })
@@ -116,18 +112,10 @@ export class Filter {
         const removeTag = item.lastElementChild;
         removeTag.addEventListener("click", () => {
           this.result.removeChild(item);
-          if (this.result.childElementCount === 0) printRecipes(this.recipes);
-          else this.filterRecipes();
+          if (this.result.childElementCount === 0) this.list.filter();
+          else this.list.filter();
         })
       })
     }
-  }
-
-  filterRecipes() {
-    this.listRecipes = [];
-    this.filteredItems(this.recipes)
-
-
-    printRecipes(this.listRecipes);
   }
 };

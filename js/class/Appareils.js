@@ -1,5 +1,6 @@
 import { Filter } from "./Filter.js";
 import { sortItems } from "../functions/sortItems.js";
+import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Appareils extends Filter {
   constructor(recipes) {
@@ -15,14 +16,11 @@ export class Appareils extends Filter {
         this.listElements.push(capitalized);
       }
     });
-
-    //Sort and hydrate the list of appliance
-    const sortedElements = sortItems(this.listElements);
-    this.displayFilter(sortedElements);
   }
 
   filteredItems(recipes) {
     //Filter recipes by appareils tags
+    let list = [];
     this.appareilsTags = document.querySelectorAll(".filtre_element_appareils");
     recipes.forEach(recipe => {
       if (this.appareilsTags.length > 0) {

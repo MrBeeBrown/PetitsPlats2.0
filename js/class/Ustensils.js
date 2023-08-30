@@ -1,10 +1,9 @@
 import { Filter } from "./Filter.js";
-import { sortItems } from "../functions/sortItems.js";
 import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Ustensils extends Filter {
-  constructor(recipes) {
-    super("ustensils", recipes);
+  constructor(recipes, list) {
+    super("ustensils", recipes, list);
   }
 
   hydrate(recipes) {
@@ -16,27 +15,25 @@ export class Ustensils extends Filter {
         if (!this.listElements.includes(capitalized)) this.listElements.push(capitalized);
       }
     });
-
-    //Sort and hydrate the list of ustensils
-    const sortedElements = sortItems(this.listElements);
-    this.displayFilter(sortedElements);
   }
 
   filteredItems(recipes) {
     //Filter recipes by ustensils tags
+    let list = [];
     const ustensilsTags = document.querySelectorAll(".filtre_element_ustensils");
     recipes.forEach(recipe => {
       if (ustensilsTags.length > 0) {
         this.flag = 0;
-        this.listUstensils = transformToLowerCase(recipe.ustensils);
+        this.listElements = transformToLowerCase(recipe.ustensils);
         ustensilsTags.forEach(e => {
-          if (this.listUstensils.includes(e.firstElementChild.innerText.toLowerCase())) {
+          if (this.listElements.includes(e.firstElementChild.innerText.toLowerCase())) {
             this.flag++;
           }
         })
-        if (this.flag === ustensilsTags.length) this.listRecipes.push(recipe);
+        if (this.flag === ustensilsTags.length) list.push(recipe);
       }
     })
-    if (this.listRecipes.length === 0) this.listRecipes = this.recipes;
+    if (list.length === 0) return recipes;
+    return list;
   }
 }
