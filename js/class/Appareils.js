@@ -3,8 +3,8 @@ import { sortItems } from "../functions/sortItems.js";
 import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Appareils extends Filter {
-  constructor(recipes) {
-    super("appareils", recipes);
+  constructor(recipes, list) {
+    super("appareils", recipes, list);
   }
 
   hydrate(recipes) {
@@ -21,21 +21,20 @@ export class Appareils extends Filter {
   filteredItems(recipes) {
     //Filter recipes by appareils tags
     let list = [];
-    this.appareilsTags = document.querySelectorAll(".filtre_element_appareils");
+    const appareilsTags = document.querySelectorAll(".filtre_element_appareils");
     recipes.forEach(recipe => {
-      if (this.appareilsTags.length > 0) {
+      if (appareilsTags.length > 0) {
         this.flag = 0;
-        this.listAppareils = recipe.appliance.toLowerCase();
-        this.appareilsTags.forEach(e => {
-          if (this.listAppareils.includes(e.firstElementChild.innerText.toLowerCase())) {
+        this.listElements = recipe.appliance.toLowerCase();
+        appareilsTags.forEach(e => {
+          if (this.listElements.includes(e.firstElementChild.innerText.toLowerCase())) {
             this.flag++;
           }
         })
-        if (!this.flag === this.ingredientsTags.length) {
-          const findIndex = this.listRecipes.indexOf(recipe);
-          this.listRecipes.splice(findIndex);
-        }
+        if (this.flag === appareilsTags.length) list.push(recipe);
       }
     })
+    if (list.length === 0) return recipes;
+    return list;
   }
 }

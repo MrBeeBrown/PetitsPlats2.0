@@ -3,8 +3,8 @@ import { sortItems } from "../functions/sortItems.js";
 import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Ingredients extends Filter {
-  constructor(recipes) {
-    super("ingredients", recipes);
+  constructor(recipes, list) {
+    super("ingredients", recipes, list);
   }
 
   hydrate(recipes) {
@@ -20,29 +20,26 @@ export class Ingredients extends Filter {
 
   filteredItems(recipes) {
     let list = [];
-    this.ingredientsTags = document.querySelectorAll(".filtre_element_ingredients");
+    const ingredientsTags = document.querySelectorAll(".filtre_element_ingredients");
     recipes.forEach(recipe => {
-      if (this.ingredientsTags.length > 0) {
+      if (ingredientsTags.length > 0) {
         this.flag = 0;
         for (let i = 0; i < recipe.ingredients.length; i++) {
           this.listElements.push(recipe.ingredients[i].ingredient);
         }
         this.listElements = transformToLowerCase(this.listElements);
-        this.ingredientsTags.forEach(e => {
+        ingredientsTags.forEach(e => {
           if (this.listElements.includes(e.firstElementChild.innerText.toLowerCase())) {
             this.flag++;
           }
         })
 
 
-        if (!this.flag === this.ingredientsTags.length) {
-          const findIndex = this.listRecipes.indexOf(recipe);
-          this.listRecipes.splice(findIndex);
-        }
-
+        if (this.flag === ingredientsTags.length) list.push(recipe);
 
       }
     })
-    if (this.listRecipes.length === 0) this.listRecipes = this.recipes;
+    if (list.length === 0) return recipes;
+    return list;
   }
 }

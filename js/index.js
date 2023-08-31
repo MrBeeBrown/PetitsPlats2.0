@@ -16,6 +16,6 @@ list.addFilter(ustensiles);
 const ingredients = new Ingredients(recipes, list);
 list.addFilter(ingredients);
 
-/* //Create the appliance filter
-const appareils = new appareils(recipes);
-list.filter(appareils, recipes); */
+//Create the appliance filter
+const appareils = new Appareils(recipes, list);
+list.addFilter(appareils);

@@ -112,8 +112,7 @@ export class Filter {
         const removeTag = item.lastElementChild;
         removeTag.addEventListener("click", () => {
           this.result.removeChild(item);
-          if (this.result.childElementCount === 0) this.list.filter();
-          else this.list.filter();
+          this.list.filter();
         })
       })
     }
