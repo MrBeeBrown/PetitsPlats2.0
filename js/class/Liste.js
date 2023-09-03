@@ -40,7 +40,6 @@ export class Liste {
         filteredRecipes.push(...filterSelection);
       }
     })
-
     if (filteredRecipes.length === 0) {
       this.display(this.all);
       this.filters.forEach(filter => {
