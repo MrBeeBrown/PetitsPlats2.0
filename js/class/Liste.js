@@ -28,22 +28,33 @@ export class Liste {
   addFilter(filter) {
     this.filters.push(filter);
     filter.start();
-    filter.hydrate(recipes);
+    filter.hydrate(this.all);
     filter.displayFilter();
   }
 
   filter() {
-    let filteredRecipes = this.all;
+    let filteredRecipes = [];
     this.filters.forEach(filter => {
-      filteredRecipes = filter.filteredItems(this.all);
+      const filterSelection = filter.filteredItems(this.all);
+      if (filterSelection.length < this.all.length) {
+        filteredRecipes.push(...filterSelection);
+      }
     })
 
-    this.display(filteredRecipes);
-
-    this.filters.forEach(filter => {
-      filter.hydrate(filteredRecipes);
-      filter.displayFilter();
-    })
-    this.countRecipes(filteredRecipes);
+    if (filteredRecipes.length === 0) {
+      this.display(this.all);
+      this.filters.forEach(filter => {
+        filter.hydrate(this.all);
+        filter.displayFilter();
+        this.countRecipes(this.all);
+      })
+    } else {
+      this.display(filteredRecipes);
+      this.filters.forEach(filter => {
+        filter.hydrate(filteredRecipes);
+        filter.displayFilter();
+        this.countRecipes(filteredRecipes);
+      })
+    }
   }
 }

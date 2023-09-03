@@ -1,5 +1,4 @@
 import { Filter } from "./Filter.js";
-import { sortItems } from "../functions/sortItems.js";
 import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Ingredients extends Filter {
@@ -13,7 +12,9 @@ export class Ingredients extends Filter {
       //Select all ingredients from recipes
       for (let i = 0; i < element.ingredients.length; i++) {
         const capitalized = element.ingredients[i].ingredient.charAt(0).toUpperCase() + element.ingredients[i].ingredient.slice(1).toLowerCase();
-        if (!this.listElements.includes(capitalized)) this.listElements.push(capitalized);
+        if (!this.listElements.includes(capitalized)) {
+          this.listElements.push(capitalized);
+        }
       }
     });
   }
@@ -22,6 +23,7 @@ export class Ingredients extends Filter {
     let list = [];
     const ingredientsTags = document.querySelectorAll(".filtre_element_ingredients");
     recipes.forEach(recipe => {
+      this.listElements = [];
       if (ingredientsTags.length > 0) {
         this.flag = 0;
         for (let i = 0; i < recipe.ingredients.length; i++) {
@@ -33,13 +35,14 @@ export class Ingredients extends Filter {
             this.flag++;
           }
         })
-
-
-        if (this.flag === ingredientsTags.length) list.push(recipe);
-
+        if (this.flag === ingredientsTags.length) {
+          list.push(recipe);
+        }
       }
     })
-    if (list.length === 0) return recipes;
+    if (list.length === 0) {
+      return recipes;
+    }
     return list;
   }
 }

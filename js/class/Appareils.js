@@ -1,5 +1,4 @@
 import { Filter } from "./Filter.js";
-import { sortItems } from "../functions/sortItems.js";
 import { transformToLowerCase } from "../functions/transformToLowerCase.js";
 
 export class Appareils extends Filter {
@@ -31,10 +30,14 @@ export class Appareils extends Filter {
             this.flag++;
           }
         })
-        if (this.flag === appareilsTags.length) list.push(recipe);
+        if (this.flag === appareilsTags.length) {
+          list.push(recipe);
+        }
       }
     })
-    if (list.length === 0) return recipes;
+    if (list.length === 0) {
+      return recipes;
+    }
     return list;
   }
 }

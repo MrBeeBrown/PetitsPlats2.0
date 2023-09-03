@@ -12,7 +12,9 @@ export class Ustensils extends Filter {
       //Select all ustensils from recipes
       for (let i = 0; i < element.ustensils.length; i++) {
         const capitalized = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1).toLowerCase();
-        if (!this.listElements.includes(capitalized)) this.listElements.push(capitalized);
+        if (!this.listElements.includes(capitalized)) {
+          this.listElements.push(capitalized);
+        }
       }
     });
   }
@@ -30,10 +32,14 @@ export class Ustensils extends Filter {
             this.flag++;
           }
         })
-        if (this.flag === ustensilsTags.length) list.push(recipe);
+        if (this.flag === ustensilsTags.length) {
+          list.push(recipe);
+        }
       }
     })
-    if (list.length === 0) return recipes;
+    if (list.length === 0) {
+      return recipes;
+    }
     return list;
   }
 }
