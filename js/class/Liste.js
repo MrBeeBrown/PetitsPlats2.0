@@ -33,27 +33,15 @@ export class Liste {
   }
 
   filter() {
-    let filteredRecipes = [];
+    let filteredRecipes = this.all;
     this.filters.forEach(filter => {
-      const filterSelection = filter.filteredItems(this.all);
-      if (filterSelection.length < this.all.length) {
-        filteredRecipes.push(...filterSelection);
-      }
+      filteredRecipes = filter.filteredItems(filteredRecipes);
     })
-    if (filteredRecipes.length === 0) {
-      this.display(this.all);
-      this.filters.forEach(filter => {
-        filter.hydrate(this.all);
-        filter.displayFilter();
-        this.countRecipes(this.all);
-      })
-    } else {
-      this.display(filteredRecipes);
-      this.filters.forEach(filter => {
-        filter.hydrate(filteredRecipes);
-        filter.displayFilter();
-        this.countRecipes(filteredRecipes);
-      })
-    }
+    this.display(filteredRecipes);
+    this.filters.forEach(filter => {
+      filter.hydrate(filteredRecipes);
+      filter.displayFilter();
+    })
+    this.countRecipes(filteredRecipes);
   }
 }
