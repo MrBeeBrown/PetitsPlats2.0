@@ -23,14 +23,14 @@ export class Appareils extends Filter {
     const appareilsTags = document.querySelectorAll(".filtre_element_appareils");
     recipes.forEach(recipe => {
       if (appareilsTags.length > 0) {
-        this.flag = 0;
+        let count = 0;
         this.listElements = recipe.appliance.toLowerCase();
         appareilsTags.forEach(e => {
           if (this.listElements.includes(e.firstElementChild.innerText.toLowerCase())) {
-            this.flag++;
+            count++;
           }
         })
-        if (this.flag === appareilsTags.length) {
+        if (count === appareilsTags.length) {
           list.push(recipe);
         }
       }

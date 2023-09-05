@@ -25,14 +25,14 @@ export class Ustensils extends Filter {
     const ustensilsTags = document.querySelectorAll(".filtre_element_ustensils");
     recipes.forEach(recipe => {
       if (ustensilsTags.length > 0) {
-        this.flag = 0;
+        let count = 0;
         this.listElements = transformToLowerCase(recipe.ustensils);
         ustensilsTags.forEach(e => {
           if (this.listElements.includes(e.firstElementChild.innerText.toLowerCase())) {
-            this.flag++;
+            count++;
           }
         })
-        if (this.flag === ustensilsTags.length) {
+        if (count === ustensilsTags.length) {
           list.push(recipe);
         }
       }

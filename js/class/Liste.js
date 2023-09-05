@@ -4,6 +4,10 @@ export class Liste {
   constructor(recipes) {
     this.all = recipes;
     this.filters = [];
+    document.querySelector('#recherche').addEventListener('input', (e) => {
+      const needle = e.target.value.toLowerCase();
+      this.filter(needle);
+    })
   }
 
   display(recipes) {
@@ -32,8 +36,14 @@ export class Liste {
     filter.displayFilter();
   }
 
-  filter() {
+  filter(needle = null) {
     let filteredRecipes = this.all;
+
+    if (needle) {
+      filteredRecipes = this.searchA(needle, filteredRecipes);
+      /* filteredRecipes = this.searchB(needle, filteredRecipes); */
+    }
+
     this.filters.forEach(filter => {
       filteredRecipes = filter.filteredItems(filteredRecipes);
     })
@@ -43,5 +53,44 @@ export class Liste {
       filter.displayFilter();
     })
     this.countRecipes(filteredRecipes);
+  }
+
+  searchA(needle, recipes) {
+    let needleRecipes = [];
+    for (let i = 0; i < recipes.length; i++) {
+      if (recipes[i].name.toLowerCase().includes(needle)) {
+        needleRecipes.push(recipes[i]);
+      }
+      else if (recipes[i].description.toLowerCase().includes(needle)) {
+        needleRecipes.push(recipes[i]);
+      } else {
+        for (let j = 0; j < recipes[i].ingredients.length; j++) {
+          if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(needle)) {
+            needleRecipes.push(recipes[i]);
+          }
+        }
+      }
+    }
+    return needleRecipes;
+  }
+
+  searchB(needle, recipes) {
+    let needleRecipes = [];
+    recipes.forEach(recipe => {
+      const ingredientsTest = recipe.ingredients;
+      if (recipe.name.toLowerCase().includes(needle)) {
+        needleRecipes.push(recipe);
+      }
+      else if (recipe.description.toLowerCase().includes(needle)) {
+        needleRecipes.push(recipe);
+      } else {
+        for (let j = 0; j < recipe.ingredients.length; j++) {
+          if (recipe.ingredients[j].ingredient.toLowerCase().includes(needle)) {
+            needleRecipes.push(recipe);
+          }
+        }
+      }
+    })
+    return needleRecipes;
   }
 }

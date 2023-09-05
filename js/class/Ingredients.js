@@ -25,17 +25,17 @@ export class Ingredients extends Filter {
     recipes.forEach(recipe => {
       this.listElements = [];
       if (ingredientsTags.length > 0) {
-        this.flag = 0;
+        let count = 0;
         for (let i = 0; i < recipe.ingredients.length; i++) {
           this.listElements.push(recipe.ingredients[i].ingredient);
         }
         this.listElements = transformToLowerCase(this.listElements);
         ingredientsTags.forEach(e => {
           if (this.listElements.includes(e.firstElementChild.innerText.toLowerCase())) {
-            this.flag++;
+            count++;
           }
         })
-        if (this.flag === ingredientsTags.length) {
+        if (count === ingredientsTags.length) {
           list.push(recipe);
         }
       }

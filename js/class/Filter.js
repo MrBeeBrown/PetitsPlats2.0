@@ -13,7 +13,6 @@ export class Filter {
     this.searchInput = document.querySelector(`#${this.name}_search`);
     this.result = document.querySelector(`.filtre_resultat`);
     this.listElements = [];
-    this.flag = 0;
   }
 
   start() {
