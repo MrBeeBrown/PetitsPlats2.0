@@ -39,8 +39,8 @@ export class Liste {
   filter(needle = null) {
     let filteredRecipes = this.all;
     if (needle) {
-      /* filteredRecipes = this.searchA(needle, filteredRecipes); */
-      filteredRecipes = this.searchB(needle, filteredRecipes);
+      filteredRecipes = this.searchA(needle, filteredRecipes);
+      /* filteredRecipes = this.searchB(needle, filteredRecipes); */
     }
     this.filters.forEach(filter => {
       filteredRecipes = filter.filteredItems(filteredRecipes);
