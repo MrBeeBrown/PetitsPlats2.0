@@ -4,9 +4,10 @@ export class Liste {
   constructor(recipes) {
     this.all = recipes;
     this.filters = [];
+    this.needle = '';
     document.querySelector('#recherche').addEventListener('input', (e) => {
-      const needle = e.target.value.toLowerCase();
-      this.filter(needle);
+      this.needle = e.target.value.toLowerCase();
+      this.filter();
     })
   }
 
@@ -36,11 +37,11 @@ export class Liste {
     filter.displayFilter();
   }
 
-  filter(needle = null) {
+  filter() {
     let filteredRecipes = this.all;
-    if (needle) {
+    if (this.needle.length > 0) {
       filteredRecipes = this.searchA(needle, filteredRecipes);
-      /* filteredRecipes = this.searchB(needle, filteredRecipes); */
+      /* filteredRecipes = this.searchB(this.needle, filteredRecipes); */
     }
     this.filters.forEach(filter => {
       filteredRecipes = filter.filteredItems(filteredRecipes);
@@ -81,11 +82,11 @@ export class Liste {
       else if (recipe.description.toLowerCase().includes(needle)) {
         needleRecipes.push(recipe);
       } else {
-        for (let j = 0; j < recipe.ingredients.length; j++) {
-          if (recipe.ingredients[j].ingredient.toLowerCase().includes(needle)) {
+        recipe.ingredients.forEach(ingredients => {
+          if (ingredients.ingredient.toLowerCase().includes(needle)) {
             needleRecipes.push(recipe);
           }
-        }
+        })
       }
     })
     return needleRecipes;
