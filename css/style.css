@@ -147,6 +147,12 @@ main {
   cursor: pointer;
 }
 
+.not_found {
+  font-size: .9rem;
+  font-weight: 600;
+  font-family: 'Manrope', sans-serif;
+}
+
 .selections {
   display: flex;
   gap: 2rem;

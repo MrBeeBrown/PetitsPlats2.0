@@ -11,14 +11,21 @@ export class Liste {
     })
   }
 
-  display(recipes) {
+  display(recipes, needle) {
     //Print the recipes
     const espaceRecipes = document.querySelector('.liste_recettes');
     espaceRecipes.innerHTML = ``;
-    recipes.forEach(element => {
-      const ficheRecette = new Recette(element);
-      ficheRecette.print();
-    });
+    if (recipes.length === 0) {
+      document.querySelector('.not_found').innerHTML = `
+        Aucune recette ne contient ‘ ${needle} ’ vous pouvez chercher « tarte aux pommes », « poisson », etc...
+      `
+    } else {
+      document.querySelector('.not_found').innerHTML = ``
+      recipes.forEach(element => {
+        const ficheRecette = new Recette(element);
+        ficheRecette.print();
+      });
+    }
   }
 
   countRecipes(recipes) {
@@ -39,14 +46,14 @@ export class Liste {
 
   filter() {
     let filteredRecipes = this.all;
-    if (this.needle.length > 0) {
-      filteredRecipes = this.searchA(needle, filteredRecipes);
+    if (this.needle.length > 2) {
+      filteredRecipes = this.searchA(this.needle, filteredRecipes);
       /* filteredRecipes = this.searchB(this.needle, filteredRecipes); */
     }
     this.filters.forEach(filter => {
       filteredRecipes = filter.filteredItems(filteredRecipes);
     })
-    this.display(filteredRecipes);
+    this.display(filteredRecipes, this.needle);
     this.filters.forEach(filter => {
       filter.hydrate(filteredRecipes);
       filter.displayFilter();
