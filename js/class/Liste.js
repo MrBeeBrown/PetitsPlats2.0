@@ -48,7 +48,6 @@ export class Liste {
     let filteredRecipes = this.all;
     if (this.needle.length > 2) {
       filteredRecipes = this.searchA(this.needle, filteredRecipes);
-      /* filteredRecipes = this.searchB(this.needle, filteredRecipes); */
     }
     this.filters.forEach(filter => {
       filteredRecipes = filter.filteredItems(filteredRecipes);
@@ -77,25 +76,6 @@ export class Liste {
         }
       }
     }
-    return needleRecipes;
-  }
-
-  searchB(needle, recipes) {
-    let needleRecipes = [];
-    recipes.forEach(recipe => {
-      if (recipe.name.toLowerCase().includes(needle)) {
-        needleRecipes.push(recipe);
-      }
-      else if (recipe.description.toLowerCase().includes(needle)) {
-        needleRecipes.push(recipe);
-      } else {
-        recipe.ingredients.forEach(ingredients => {
-          if (ingredients.ingredient.toLowerCase().includes(needle)) {
-            needleRecipes.push(recipe);
-          }
-        })
-      }
-    })
     return needleRecipes;
   }
 }
