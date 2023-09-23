@@ -47,8 +47,7 @@ export class Liste {
   filter() {
     let filteredRecipes = this.all;
     if (this.needle.length > 2) {
-      filteredRecipes = this.searchA(this.needle, filteredRecipes);
-      /* filteredRecipes = this.searchB(this.needle, filteredRecipes); */
+      filteredRecipes = this.searchB(this.needle, filteredRecipes);
     }
     this.filters.forEach(filter => {
       filteredRecipes = filter.filteredItems(filteredRecipes);
@@ -59,25 +58,6 @@ export class Liste {
       filter.displayFilter();
     })
     this.countRecipes(filteredRecipes);
-  }
-
-  searchA(needle, recipes) {
-    let needleRecipes = [];
-    for (let i = 0; i < recipes.length; i++) {
-      if (recipes[i].name.toLowerCase().includes(needle)) {
-        needleRecipes.push(recipes[i]);
-      }
-      else if (recipes[i].description.toLowerCase().includes(needle)) {
-        needleRecipes.push(recipes[i]);
-      } else {
-        for (let j = 0; j < recipes[i].ingredients.length; j++) {
-          if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(needle)) {
-            needleRecipes.push(recipes[i]);
-          }
-        }
-      }
-    }
-    return needleRecipes;
   }
 
   searchB(needle, recipes) {
